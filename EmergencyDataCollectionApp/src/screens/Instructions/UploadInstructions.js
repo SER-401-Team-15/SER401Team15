@@ -57,8 +57,7 @@ const UpLoadInstructions = () => {
             such as a USB drive or SD card.
           </Text>
           <Text style={styles.instruction}>
-            2. To connect to iPhone, you might need a cable adapter. See Connect
-            external storage devices to iPhone.
+            2. To connect to iPhone, you might need a cable adapter.
           </Text>
           <Text style={styles.instruction}>
             3. Note: If an alert appears on iPhone asking whether to trust this
