@@ -12,6 +12,7 @@ import {
   ButtonText,
 } from "@gluestack-ui/themed";
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 import { View, Text, TouchableOpacity } from "react-native";
 
 import { removeReportById } from "../../utils/Database/OfflineSQLiteDB";
@@ -25,6 +26,7 @@ export const ButtonContainer = ({ reports }) => {
   const [showExportErrorAlert, setShowExportErrorAlert] = React.useState(false);
   const [showExportSuccessAlert, setShowExportSuccessAlert] =
     React.useState(false);
+  const navigation = useNavigation();
 
   function compileReports(callback) {
     const compiledReports = [];
@@ -60,6 +62,7 @@ export const ButtonContainer = ({ reports }) => {
         removeReportById(k);
       }
     }
+    navigation.navigate("MainScreen");
   };
 
   return (
