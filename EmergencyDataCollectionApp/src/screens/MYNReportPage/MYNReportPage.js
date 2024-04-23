@@ -21,6 +21,7 @@ import PeoplePage from "./PeoplePage/PeoplePage";
 import LoadUserPreset from "./components/LoadUserPreset";
 import LoadingScreen from "../../components/CustomFeedback/LoadingScreen/LoadingScreen";
 import ReportHeader from "../../components/ReportHeader/ReportHeader";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const InfoRoute = () => (
   <Box flex={1}>
@@ -172,6 +173,7 @@ const TabsComponent = () => {
 
 // TODO pass arg to this, change subtitle on whether arg is null or not
 export default () => {
+  const insets = useSafeAreaInsets();
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -189,6 +191,8 @@ export default () => {
         style={{
           flex: 1,
           paddingHorizontal: 20,
+          paddingTop: insets.top,
+          paddingBottom: insets.bottom,
         }}
       >
         <ReportHeader
