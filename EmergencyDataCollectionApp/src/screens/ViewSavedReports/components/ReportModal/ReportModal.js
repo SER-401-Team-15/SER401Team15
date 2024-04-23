@@ -6,7 +6,7 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  Alert
+  Alert,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
@@ -18,7 +18,6 @@ import HazardReview from "../ReportReviewPages/HazardReview";
 import MYNReview from "../ReportReviewPages/MYNReview";
 
 const ReportDetailsModal = ({ report, visible, onClose, onDelete }) => {
-
   const handleDelete = () => {
     removeReportById(report.report_id, (success, error) => {
       if (success) {
@@ -26,9 +25,14 @@ const ReportDetailsModal = ({ report, visible, onClose, onDelete }) => {
           "Success",
           "Deleted successfully",
           [
-            { text: "OK", onPress: () => { onDelete(); } }
+            {
+              text: "OK",
+              onPress: () => {
+                onDelete();
+              },
+            },
           ],
-          { cancelable: false }
+          { cancelable: false },
         );
       } else {
         console.error("Error deleting report:", error);
