@@ -7,6 +7,7 @@ import {
   Input,
 } from "native-base";
 import React, { useEffect, useState } from "react";
+import Theme from "../../../../utils/Theme";
 
 const CustomSelect = ({
   items, // required
@@ -62,7 +63,7 @@ const CustomSelect = ({
           accessibilityLabel={placeholder}
           placeholder={placeholder}
           _selectedItem={{
-            bg: "teal.600",
+            bg: Theme.COLORS.BACKGROUND_GREY,
             endIcon: <CheckIcon size={5} />,
             ...selectedItemStyle,
           }}
