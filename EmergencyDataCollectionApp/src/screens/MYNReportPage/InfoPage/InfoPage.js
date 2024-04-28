@@ -1,3 +1,4 @@
+import { Box } from "@gluestack-ui/themed";
 import { useAtom } from "jotai";
 import { KeyboardAvoidingView } from "native-base";
 import React, { useState } from "react";
@@ -109,6 +110,7 @@ function InfoPage() {
               paddingTop: 20,
             }}
           />
+          <Box mt={200} />
         </ScrollView>
         <NavigationButtons validateData={validateData} />
       </KeyboardAvoidingView>

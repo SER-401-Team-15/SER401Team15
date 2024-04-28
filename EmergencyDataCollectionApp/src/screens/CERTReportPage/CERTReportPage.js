@@ -9,6 +9,7 @@ import {
   View,
   Alert,
 } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { TabView, SceneMap } from "react-native-tab-view";
 
 import { certTabsStatusAtom } from "./CERTPageAtoms";
@@ -20,7 +21,6 @@ import PeoplePage from "./PeoplePage/PeoplePage";
 import LoadUserPreset from "./components/LoadUserPreset";
 import LoadingScreen from "../../components/CustomFeedback/LoadingScreen/LoadingScreen";
 import ReportHeader from "../../components/ReportHeader/ReportHeader";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const InfoRoute = () => (
   <Box flex={1}>
@@ -161,7 +161,7 @@ const TabsComponent = () => {
 };
 
 export default () => {
-  const insets = useSafeAreaInsets(); 
+  const insets = useSafeAreaInsets();
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const timer = setTimeout(() => {

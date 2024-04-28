@@ -1,3 +1,4 @@
+import { Box } from "@gluestack-ui/themed";
 import { useAtomValue, useAtom } from "jotai";
 import { useResetAtom } from "jotai/utils";
 import { KeyboardAvoidingView } from "native-base";
@@ -153,6 +154,7 @@ function FirstScreen() {
               paddingBottom: 3,
             }}
           />
+          <Box mt={200} />
         </ScrollView>
         <NavigationButtons validateData={validateData} />
       </KeyboardAvoidingView>

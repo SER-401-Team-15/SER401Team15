@@ -1,3 +1,4 @@
+import { Box } from "@gluestack-ui/themed";
 import { useAtom } from "jotai/index";
 import React, { useState } from "react";
 import { View, ScrollView, Alert } from "react-native";
@@ -194,6 +195,7 @@ const HazardsPage = () => {
             onChange={handleHazardChemicalChange}
             isInvalid={isHazardChemicalInvalid}
           />
+          <Box mt={200} />
         </ScrollView>
         <NavigationButtons validateData={validateData} />
       </View>
