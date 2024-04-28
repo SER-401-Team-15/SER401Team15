@@ -184,6 +184,7 @@ const AnimalPage = () => {
               }}
             />
           )}
+          <Box mt={200} />
         </ScrollView>
         <NavigationButtons validateData={validateData} />
       </KeyboardAvoidingView>

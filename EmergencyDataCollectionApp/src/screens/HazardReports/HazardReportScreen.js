@@ -9,6 +9,7 @@ import {
   View,
   Alert,
 } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { TabView } from "react-native-tab-view";
 
 import FirstScreen from "./FirstScreen";
@@ -18,7 +19,6 @@ import ThirdScreen from "./ThirdScreen";
 import LoadUserPreset from "./components/LoadUserPreset";
 import LoadingScreen from "../../components/CustomFeedback/LoadingScreen/LoadingScreen";
 import ReportHeader from "../../components/ReportHeader/ReportHeader";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 const FirstRoute = ({ route }) => {
   console.log("route", route);
   return (

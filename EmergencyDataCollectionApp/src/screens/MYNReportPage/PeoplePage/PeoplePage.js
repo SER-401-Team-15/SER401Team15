@@ -1,3 +1,4 @@
+import { Box } from "@gluestack-ui/themed";
 import { useAtom } from "jotai";
 import { KeyboardAvoidingView } from "native-base";
 import React, { useState } from "react";
@@ -324,6 +325,7 @@ const PeoplePage = () => {
               paddingBottom: 3,
             }}
           />
+          <Box mt={200} />
         </ScrollView>
         <NavigationButtons validateData={validateData} />
       </KeyboardAvoidingView>

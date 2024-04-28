@@ -1,3 +1,4 @@
+import { Box } from "@gluestack-ui/themed";
 import { useAtom, useAtomValue } from "jotai";
 import { useResetAtom } from "jotai/utils";
 import { KeyboardAvoidingView } from "native-base";
@@ -269,6 +270,7 @@ const LocationPage = () => {
               paddingBottom: 10,
             }}
           />
+          <Box mt={200} />
         </ScrollView>
         <NavigationButtons validateData={validateData} />
       </KeyboardAvoidingView>

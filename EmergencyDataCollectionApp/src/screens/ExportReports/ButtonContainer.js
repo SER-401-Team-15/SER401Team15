@@ -11,8 +11,8 @@ import {
   Button,
   ButtonText,
 } from "@gluestack-ui/themed";
-import React from "react";
 import { useNavigation } from "@react-navigation/native";
+import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 
 import { removeReportById } from "../../utils/Database/OfflineSQLiteDB";
