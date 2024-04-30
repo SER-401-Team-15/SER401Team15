@@ -21,8 +21,8 @@ export const mynReportAtom = atomWithReset({
     reportID: "",
     groupName: "",
     squadName: "",
-    startTime: new Date(),
-    endTime: new Date(),
+    startTime: "",
+    endTime: "",
     hazardType: "",
   },
   location: {

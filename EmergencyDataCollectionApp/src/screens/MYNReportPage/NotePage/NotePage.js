@@ -14,6 +14,15 @@ import NavigationButtons from "../components/NavigationButtons";
 const NotePage = () => {
   const [mynReport, setMynReport] = useAtom(mynReportAtom);
   const [mynTabsStatus, setMynTabsStatus] = useAtom(mynTabsStatusAtom);
+  if (mynReport.info.endTime === "") {
+    setMynReport((prev) => ({
+      ...prev,
+      info: {
+        ...prev.info,
+        endTime: new Date(),
+      },
+    }));
+  }
 
   const handleDataTimeChange = (event, selectedDate) => {
     const currentDate = selectedDate || mynReport.info.endTime;
