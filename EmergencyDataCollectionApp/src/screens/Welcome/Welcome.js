@@ -20,7 +20,7 @@ const Welcome = ({ navigation }) => {
         />
       </View>
       <View style={styles.textContainer}>
-        <Text style={styles.title}>NeighborCheck</Text>
+        <Text style={styles.title}>Neighbor Check</Text>
       </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity
