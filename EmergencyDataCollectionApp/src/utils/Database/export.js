@@ -115,6 +115,7 @@ function buildString(reports) {
       }
       csvString += ",";
       csvString += report_data.info.hazardType + ",";
+      report_data.note.NotesTextArea = report_data.note.NotesTextArea.replace(/\n/g, " ");
       csvString += report_data.note.NotesTextArea + ",";
       csvString += report_data.info.hash + ",";
       csvString += report_data.info.endTime + ",";
