@@ -16,6 +16,15 @@ function InfoPage() {
   const [certTabsStatus, setCERTTabsStatus] = useAtom(certTabsStatusAtom);
   const [isGroupNameInvalid, setIsGroupNameInvalid] = useState(false);
   const [isSquadNameInvalid, setIsSquadNameInvalid] = useState(false);
+  if (certReport.info.startTime === "") {
+    setCERTReport((prev) => ({
+      ...prev,
+      info: {
+        ...prev.info,
+        startTime: new Date(),
+      },
+    }));
+  }
 
   const handleGroupNameChange = (value) => {
     setCERTReport((prev) => ({
