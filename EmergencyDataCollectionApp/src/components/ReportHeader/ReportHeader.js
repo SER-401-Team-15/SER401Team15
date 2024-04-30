@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   textHeader: {
-    fontSize: Theme.TYPOGRAPHY.FONT_SIZE.XLARGE,
+    fontSize: Theme.TYPOGRAPHY.FONT_SIZE.MED_LARGE,
     fontWeight: "bold",
     textAlign: "left",
   },
