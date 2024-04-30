@@ -15,17 +15,11 @@ export default function SecondScreen() {
   const [hazardReport, setHazardReport] = useAtom(hazardReportAtom);
   const [hazardTabsStatus, setHazardTabsStatus] = useAtom(hazardTabsStatusAtom);
   const [inputText] = useState("");
-  const [endTime] = useState(new Date());
+  const [endTime, setEndTime] = useState(new Date());
 
   const handleEndTimeChange = (event, selectedDate) => {
     const currentDate = selectedDate || hazardReport.info.endTime;
-    setHazardReport((prev) => ({
-      ...prev,
-      info: {
-        ...prev.info,
-        endTime: currentDate,
-      },
-    }));
+    setEndTime(currentDate);
   };
 
   const handleNotesChange = (value) => {
@@ -45,11 +39,10 @@ export default function SecondScreen() {
 
     setHazardReport((prev) => ({
       ...prev,
-      report: {
-        ...prev.report,
-        Notes: inputText,
-        EndTime: endTime,
-      },
+        info: {
+          ...prev.info,
+          endTime: endTime,
+        },
     }));
 
     const currentTabIndex = hazardTabsStatus.tabIndex;
@@ -71,7 +64,7 @@ export default function SecondScreen() {
         <ScrollView>
           <CustomDateTimePickerComponent
             title="1. Need to change the date and time of the report?"
-            value={hazardReport.info.endTime}
+            value={endTime}
             handleDataTimeChange={handleEndTimeChange}
             isRequired
           />

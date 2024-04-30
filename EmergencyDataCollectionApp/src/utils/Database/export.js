@@ -115,11 +115,7 @@ function buildString(reports) {
       }
       csvString += ",";
       csvString += report_data.info.hazardType + ",";
-      if (element.report_type === "Hazard") {
-        csvString += report_data.report.Notes + ",";
-      } else {
-        csvString += report_data.note.NotesTextArea + ",";
-      }
+      csvString += report_data.note.NotesTextArea + ",";
       csvString += report_data.info.hash + ",";
       csvString += report_data.info.endTime + ",";
       csvString += "\n";
