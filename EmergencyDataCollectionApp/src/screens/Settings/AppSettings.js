@@ -2,7 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { NativeBaseProvider } from "native-base";
 import React, { useState, useEffect } from "react";
-import { View, Text, Alert } from "react-native";
+import { View, Text, Alert, ScrollView } from "react-native";
 
 import styles from "./styles";
 import CustomButton from "../../components/CustomForms/CustomButton/CustomButton";
@@ -112,74 +112,76 @@ const AppSettings = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <NativeBaseProvider>
-        <Text style={styles.header}>User Preferences:</Text>
-        <View>
-          <Text>Ready Neighbor Group Name</Text>
-          <CustomInput
-            value={groupName}
-            onChangeText={setGroupName}
-            placeholder="Enter Ready Neighbor Group Name"
-            style={styles.input}
-          />
-        </View>
-        <View>
-          <Text>Cert Group Number</Text>
-          <CustomInput
-            value={selectedCertGroupNumber}
-            onChangeText={setSelectedCertGroupNumber}
-            placeholder="Enter Cert Group Number"
-            style={styles.input}
-          />
-          <Text>Cert Squad Name</Text>
-          <CustomInput
-            value={selectedCertSquadName}
-            onChangeText={setSelectedCertSquadName}
-            placeholder="Enter Cert Squad Name"
-            style={styles.input}
-          />
-        </View>
-        <View>
-          <Text>City</Text>
-          <CustomInput
-            value={city}
-            onChangeText={setCity}
-            placeholder="Enter City"
-            style={styles.input}
-          />
-          <Text style={{ color: zipError ? "red" : "black" }}>
-            {zipError ? "Zip code must be a 5-digit number." : "Zip"}
-          </Text>
-          <CustomInput
-            value={zip}
-            onChangeText={setZip}
-            placeholder="Enter Zip"
-            style={[styles.input, { borderColor: zipError ? "red" : "black" }]}
-          />
-          <Text>State</Text>
-          <CustomSelect
-            items={States}
-            placeholder="State"
-            selectedValue={selectedState}
-            value={selectedState}
-            onChange={setSelectedState}
-          />
-        </View>
-        <View style={styles.buttonContainer}>
-          <CustomButton
-            title="Return to Main Menu"
-            onPress={navigateToMainPage}
-            buttonStyle={styles.cancelButton}
-          />
-          <CustomButton
-            title="Save"
-            onPress={handleButtonPress}
-            buttonStyle={styles.Savebutton}
-          />
-        </View>
-      </NativeBaseProvider>
-    </View>
+    <ScrollView contentContainerStyle={styles.scrollViewContent}>
+      <View style={styles.container}>
+        <NativeBaseProvider>
+          <Text style={styles.header}>User Preferences:</Text>
+          <View>
+            <Text>Ready Neighbor Group Name</Text>
+            <CustomInput
+              value={groupName}
+              onChangeText={setGroupName}
+              placeholder="Enter Ready Neighbor Group Name"
+              style={styles.input}
+            />
+          </View>
+          <View>
+            <Text>Cert Group Number</Text>
+            <CustomInput
+              value={selectedCertGroupNumber}
+              onChangeText={setSelectedCertGroupNumber}
+              placeholder="Enter Cert Group Number"
+              style={styles.input}
+            />
+            <Text>Cert Squad Name</Text>
+            <CustomInput
+              value={selectedCertSquadName}
+              onChangeText={setSelectedCertSquadName}
+              placeholder="Enter Cert Squad Name"
+              style={styles.input}
+            />
+          </View>
+          <View>
+            <Text>City</Text>
+            <CustomInput
+              value={city}
+              onChangeText={setCity}
+              placeholder="Enter City"
+              style={styles.input}
+            />
+            <Text style={{ color: zipError ? "red" : "black" }}>
+              {zipError ? "Zip code must be a 5-digit number." : "Zip"}
+            </Text>
+            <CustomInput
+              value={zip}
+              onChangeText={setZip}
+              placeholder="Enter Zip"
+              style={[styles.input, { borderColor: zipError ? "red" : "black" }]}
+            />
+            <Text>State</Text>
+            <CustomSelect
+              items={States}
+              placeholder="State"
+              selectedValue={selectedState}
+              value={selectedState}
+              onChange={setSelectedState}
+            />
+          </View>
+          <View style={styles.buttonContainer}>
+            <CustomButton
+              title="Return to Main Menu"
+              onPress={navigateToMainPage}
+              buttonStyle={styles.cancelButton}
+            />
+            <CustomButton
+              title="Save"
+              onPress={handleButtonPress}
+              buttonStyle={styles.Savebutton}
+            />
+          </View>
+        </NativeBaseProvider>
+      </View>
+    </ScrollView>
   );
 };
 

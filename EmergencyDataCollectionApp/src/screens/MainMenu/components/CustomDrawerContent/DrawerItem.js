@@ -14,6 +14,7 @@ import React from "react";
 import { StyleSheet, TouchableOpacity, Linking } from "react-native";
 
 import Theme from "../../../../utils/Theme";
+import CreditsPage from "../../../CreditsPage/CreditsPage";
 
 class DrawerCustomItem extends React.Component {
   renderIcon = () => {
@@ -105,16 +106,15 @@ class DrawerCustomItem extends React.Component {
             Linking.openURL("https://www.bellelealand.net/donations").catch(
               (err) => console.error("An error occurred", err),
             );
-          } else if (
-            title === "How to use" ||
-            title === "Contribute" ||
-            title === "Credit"
-          ) {
+          } else if (title === "Website") {
+            Linking.openURL("https://neighborcheckapp.wixsite.com/home").catch(
+              (err) => console.error("An error occurred", err),
+            );
+          } else if (title === "Contribute") {
             Linking.openURL(
               "https://github.com/SER-401-Team-15/SER401Team15",
             ).catch((err) => console.error("An error occurred", err));
           } else {
-            navigation.navigate(navigateTo);
           }
         }}
       >

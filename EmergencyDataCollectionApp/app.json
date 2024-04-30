@@ -2,7 +2,7 @@
   "expo": {
     "name": "EmergencyDataCollectionApp",
     "slug": "EmergencyDataCollectionApp",
-    "version": "1.0.0",
+    "version": "1.2.0",
     "orientation": "portrait",
     "icon": "./assets/appicon.png",
     "userInterfaceStyle": "light",
@@ -23,7 +23,7 @@
       "bundleIdentifier": "com.shunt161.EmergencyDataCollectionApp"
     },
     "android": {
-      "versionCode": 2,
+      "versionCode": 3,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"

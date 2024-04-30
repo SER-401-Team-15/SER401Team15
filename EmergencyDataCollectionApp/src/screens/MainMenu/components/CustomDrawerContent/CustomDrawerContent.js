@@ -61,7 +61,7 @@ function CustomDrawerContent({
               DOCUMENTATION
             </Text>
           </Block>
-          <DrawerCustomItem title="How to use" navigation={navigation} />
+          <DrawerCustomItem title="Website" navigation={navigation} />
           <DrawerCustomItem title="Contribute" navigation={navigation} />
           <DrawerCustomItem title="Donation" navigation={navigation} />
           <DrawerCustomItem title="Source" navigation={navigation} />
