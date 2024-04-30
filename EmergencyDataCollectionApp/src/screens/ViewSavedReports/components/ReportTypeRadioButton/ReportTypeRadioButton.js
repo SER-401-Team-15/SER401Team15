@@ -31,7 +31,7 @@ const ReportTypeRadioButton = ({ value, onChange }) => {
             <RadioIndicator mr="$2">
               <RadioIcon as={CircleIcon} />
             </RadioIndicator>
-            <RadioLabel>MYN</RadioLabel>
+            <RadioLabel>Ready Neighbor</RadioLabel>
           </Radio>
           <Radio value="CERT">
             <RadioIndicator mr="$2">

@@ -17,10 +17,10 @@ function InstructionNavigation({ navigation }) {
         screenOptions={{
           tabBarActiveTintColor: "#111111",
           tabBarLabelStyle: { fontSize: 8, textAlignVertical: "bottom" },
-          tabBarStyle: { backgroundColor: "#ffcc00", height: "6%" },
+          tabBarStyle: { backgroundColor: "#ffcc00", height: "10%" },
         }}
       >
-        <Tab.Screen name="Instructions" component={HomeInstructions} />
+        <Tab.Screen name="Basic" component={HomeInstructions} />
         <Tab.Screen name="CERT" component={CERTInstructions} />
         <Tab.Screen name="Ready Neighbor" component={MYNInstructions} />
         <Tab.Screen name="Hazzard" component={HazzardInstructions} />

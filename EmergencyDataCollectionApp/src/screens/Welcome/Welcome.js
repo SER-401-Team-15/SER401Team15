@@ -20,8 +20,7 @@ const Welcome = ({ navigation }) => {
         />
       </View>
       <View style={styles.textContainer}>
-        <Text style={styles.title}>Emergency Ready</Text>
-        <Text style={styles.subtitle}>Hazard Reporting</Text>
+        <Text style={styles.title}>NeighborCheck</Text>
       </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity
