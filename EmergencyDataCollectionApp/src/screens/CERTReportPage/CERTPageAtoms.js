@@ -20,8 +20,8 @@ export const certReportAtom = atomWithReset({
     reportID: "",
     groupName: "",
     squadName: "",
-    startTime: new Date(),
-    endTime: new Date(),
+    startTime: "",
+    endTime: "",
     hazardType: "",
   },
   location: {

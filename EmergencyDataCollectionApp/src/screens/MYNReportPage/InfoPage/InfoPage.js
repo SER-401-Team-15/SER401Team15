@@ -16,6 +16,15 @@ function InfoPage() {
   const [mynTabsStatus, setMynTabsStatus] = useAtom(mynTabsStatusAtom);
 
   const [isGroupNameInvalid, setIsGroupNameInvalid] = useState(false);
+  if (mynReport.info.startTime === "") {
+    setMynReport((prev) => ({
+      ...prev,
+      info: {
+        ...prev.info,
+        startTime: new Date(),
+      },
+    }));
+  }
 
   const handleGroupNameChange = (value) => {
     setMynReport((prev) => ({

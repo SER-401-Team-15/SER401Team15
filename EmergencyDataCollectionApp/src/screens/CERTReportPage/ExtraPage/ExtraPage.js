@@ -14,6 +14,15 @@ import NavigationButtons from "../components/NavigationButtons";
 const NotePage = () => {
   const [certReport, setCERTReport] = useAtom(certReportAtom);
   const [certTabsStatus, setCERTTabsStatus] = useAtom(certTabsStatusAtom);
+  if (certReport.info.endTime === "") {
+    setCERTReport((prev) => ({
+      ...prev,
+      info: {
+        ...prev.info,
+        endTime: new Date(),
+      },
+    }));
+  }
 
   const handleDataTimeChange = (event, selectedDate) => {
     const currentDate = selectedDate || certReport.info.endTime;

@@ -80,7 +80,14 @@ function FirstScreen() {
       //requiredFieldsList.push("► 2. GPS Coordinates");
     }
     if (!hazardReport.info.startTime) {
-      requiredFieldsList.push("► 1. Start Time");
+      setHazardReport((prev) => ({
+        ...prev,
+          info: {
+            ...prev.info,
+            startTime: startTime,
+          },
+      }));
+      // requiredFieldsList.push("► 1. Start Time");
     }
 
     if (
