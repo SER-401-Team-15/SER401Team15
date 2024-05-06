@@ -52,7 +52,7 @@ class DrawerCustomItem extends React.Component {
             color={focused ? "white" : Theme.COLORS.TEXT_BLACK}
           />
         );
-      case "How to use":
+      case "Neighbor Check Website":
         return (
           <Icon
             as={ExternalLinkIcon}
@@ -76,7 +76,7 @@ class DrawerCustomItem extends React.Component {
             color={focused ? "white" : Theme.COLORS.TEXT_BLACK}
           />
         );
-      case "Source":
+      case "Source Code":
         return (
           <Icon
             as={ShareIcon}
@@ -105,11 +105,15 @@ class DrawerCustomItem extends React.Component {
             Linking.openURL("https://www.bellelealand.net/donations").catch(
               (err) => console.error("An error occurred", err),
             );
-          } else if (
-            title === "How to use" ||
-            title === "Contribute" ||
-            title === "Credit"
-          ) {
+          } else if (title === "Neighbor Check Website") {
+            Linking.openURL("https://neighborcheckapp.wixsite.com/home").catch(
+              (err) => console.error("An error occured", err),
+            );
+          } else if (title === "Contribute") {
+            Linking.openURL(
+              "https://github.com/SER-401-Team-15/SER401Team15",
+            ).catch((err) => console.error("An error occurred", err));
+          } else if (title === "Source Code") {
             Linking.openURL(
               "https://github.com/SER-401-Team-15/SER401Team15",
             ).catch((err) => console.error("An error occurred", err));

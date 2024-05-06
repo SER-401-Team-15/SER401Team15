@@ -1,7 +1,7 @@
 import { Icon, AlertCircleIcon, Box } from "@gluestack-ui/themed";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { View, StyleSheet, Dimensions, Text } from "react-native";
+import { View, StyleSheet, Dimensions, Text, ScrollView } from "react-native";
 
 import CustomButton from "../../components/CustomForms/CustomButton/CustomButton";
 import Theme from "../../utils/Theme";
@@ -37,97 +37,102 @@ const MainScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Box
-        sx={{
-          marginTop: 20,
-          flexDirection: "row",
-          alignItems: "center",
-        }}
-      >
-        <Icon
-          as={AlertCircleIcon}
-          size="lg"
+    <ScrollView contentContainerStyle={styles.scrollViewContent}>
+      <View style={styles.container}>
+        <Box
           sx={{
-            marginLeft: 12,
-            marginRight: 10,
-            marginTop: 3,
-          }}
-        />
-        <Text
-          style={{
-            fontSize: Theme.TYPOGRAPHY.FONT_SIZE.MED_LARGE,
+            marginTop: 20,
+            flexDirection: "row",
+            alignItems: "center",
           }}
         >
-          Report an emergency
-        </Text>
-      </Box>
-      <View style={styles.buttonContainer}>
-        <CustomButton
-          title="New Ready Neighbor Report"
-          onPress={handleStartNewMYNReport}
-          buttonStyle={styles.buttonStyleWide}
-          textStyle={styles.textStyle}
-        />
-        <CustomButton
-          title="New CERT Report"
-          onPress={handleStartNewCERTReport}
-          buttonStyle={styles.buttonStyleShort}
-          textStyle={styles.textStyle}
-        />
-        <CustomButton
-          title="New HAZARD Report"
-          onPress={handleStartNewHazardReport}
-          buttonStyle={styles.buttonStyleShort}
-          textStyle={styles.textStyle}
-        />
-      </View>
+          <Icon
+            as={AlertCircleIcon}
+            size="lg"
+            sx={{
+              marginLeft: 12,
+              marginRight: 10,
+              marginTop: 3,
+            }}
+          />
+          <Text
+            style={{
+              fontSize: Theme.TYPOGRAPHY.FONT_SIZE.MED_LARGE,
+            }}
+          >
+            Report an emergency
+          </Text>
+        </Box>
+        <View style={styles.buttonContainer}>
+          <CustomButton
+            title="New Ready Neighbor Report"
+            onPress={handleStartNewMYNReport}
+            buttonStyle={styles.buttonStyleWide}
+            textStyle={styles.textStyle}
+          />
+          <CustomButton
+            title="New CERT Report"
+            onPress={handleStartNewCERTReport}
+            buttonStyle={styles.buttonStyleShort}
+            textStyle={styles.textStyle}
+          />
+          <CustomButton
+            title="New HAZARD Report"
+            onPress={handleStartNewHazardReport}
+            buttonStyle={styles.buttonStyleShort}
+            textStyle={styles.textStyle}
+          />
+        </View>
 
-      <Box
-        sx={{
-          marginTop: 20,
-          flexDirection: "row",
-          alignItems: "center",
-        }}
-      >
-        <Icon
-          as={AlertCircleIcon}
-          size="lg"
+        <Box
           sx={{
-            marginLeft: 12,
-            marginRight: 10,
-            marginTop: 3,
-          }}
-        />
-        <Text
-          style={{
-            fontSize: Theme.TYPOGRAPHY.FONT_SIZE.MED_LARGE,
+            marginTop: 20,
+            flexDirection: "row",
+            alignItems: "center",
           }}
         >
-          Review and Export Reports
-        </Text>
-      </Box>
-      <View style={styles.buttonContainer}>
-        <CustomButton
-          title="View Saved Reports"
-          onPress={handleReviewSavedReports}
-          buttonStyle={styles.buttonStyleWide}
-          textStyle={styles.textStyle}
-        />
-        <CustomButton
-          title="Export Reports"
-          onPress={handleCopyToUSB}
-          buttonStyle={styles.buttonStyleShort}
-          textStyle={styles.textStyle}
-        />
+          <Icon
+            as={AlertCircleIcon}
+            size="lg"
+            sx={{
+              marginLeft: 12,
+              marginRight: 10,
+              marginTop: 3,
+            }}
+          />
+          <Text
+            style={{
+              fontSize: Theme.TYPOGRAPHY.FONT_SIZE.MED_LARGE,
+            }}
+          >
+            Review and Export Reports
+          </Text>
+        </Box>
+        <View style={styles.buttonContainer}>
+          <CustomButton
+            title="View Saved Reports"
+            onPress={handleReviewSavedReports}
+            buttonStyle={styles.buttonStyleWide}
+            textStyle={styles.textStyle}
+          />
+          <CustomButton
+            title="Export Reports"
+            onPress={handleCopyToUSB}
+            buttonStyle={styles.buttonStyleShort}
+            textStyle={styles.textStyle}
+          />
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
 export default MainScreen;
 
 const styles = StyleSheet.create({
+  scrollViewContent: {
+    flexGrow: 1,
+  },
   container: {
     flex: 1,
     backgroundColor: "#fff",

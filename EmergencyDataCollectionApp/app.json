@@ -23,6 +23,7 @@
       "bundleIdentifier": "com.shunt161.EmergencyDataCollectionApp"
     },
     "android": {
+      "versionCode": 2,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -36,7 +37,8 @@
         "android.permission.READ_EXTERNAL_STORAGE",
         "android.permission.WRITE_EXTERNAL_STORAGE",
         "android.permission.ACCESS_MEDIA_LOCATION"
-      ]
+      ],
+      "package": "com.davidhanley26.EmergencyDataCollectionApp"
     },
     "web": {
       "favicon": "./assets/favicon.png"

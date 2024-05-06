@@ -79,7 +79,7 @@ const ExportReports = () => {
 
   const reportTypes = [
     { label: "All", value: "All" },
-    { label: "MYN", value: "MYN" },
+    { label: "Ready Neighbor", value: "MYN" },
     { label: "CERT", value: "CERT" },
     { label: "Hazard", value: "Hazard" },
   ];
