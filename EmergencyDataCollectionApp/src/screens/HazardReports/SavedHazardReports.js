@@ -2,6 +2,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import * as SQLite from "expo-sqlite";
 import React, { useEffect, useState } from "react";
+import { Alert } from "react-native";
 import {
   View,
   Text,
@@ -12,7 +13,13 @@ import {
 } from "react-native";
 
 import Button from "./components/Button";
-const db = SQLite.openDatabase("HazardReports.db");
+let db;
+try {
+  db = SQLite.openDatabase("HazardReports.db");
+} catch (error) {
+  console.error("Error opening SQLite database:", error);
+  Alert.alert("Database Error", "Failed to open the SQLite database.");
+}
 
 const SavedHazardReports = () => {
   const [hazardReports, setHazardReports] = useState([]);

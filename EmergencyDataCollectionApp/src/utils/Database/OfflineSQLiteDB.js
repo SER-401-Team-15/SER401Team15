@@ -1,5 +1,5 @@
 import * as SQLite from "expo-sqlite";
-import { Platform } from "react-native";
+import { Platform, Alert } from "react-native";
 
 export function openDatabase() {
   if (Platform.OS === "web") {
@@ -11,37 +11,48 @@ export function openDatabase() {
     };
   }
 
-  return SQLite.openDatabase("saved_reports.db");
+  try {
+    return SQLite.openDatabase("saved_reports.db");
+  } catch (error) {
+    console.error("Error opening SQLite database:", error);
+    Alert.alert("Database Error", "Failed to open the SQLite database.");
+    return null;
+  }
 }
 
 const db = openDatabase();
 
 export function setupDatabase(callback) {
-  db.transaction(
-    (tx) => {
-      tx.executeSql(
-        "create table if not exists reports (report_id integer primary key not null, report_type text, report_data text);",
-        [],
-        (_, result) => {
-          console.log("Table created", result);
-          callback?.(true, null);
-        },
-        (t, error) => {
-          console.error("Error creating table", error);
-          callback?.(false, error);
-          return true;
-        },
-      );
-    },
-    (error) => {
-      console.error("Transaction error", error);
-      callback?.(false, error);
-    },
-    () => {
-      console.log("Transaction successful for creating table");
-      callback?.(true, null);
-    },
-  );
+  try{
+    db.transaction(
+      (tx) => {
+        tx.executeSql(
+          "create table if not exists reports (report_id integer primary key not null, report_type text, report_data text);",
+          [],
+          (_, result) => {
+            console.log("Table created", result);
+            callback?.(true, null);
+          },
+          (t, error) => {
+            console.error("Error creating table", error);
+            callback?.(false, error);
+            return true;
+          },
+        );
+      },
+      (error) => {
+        console.error("Transaction error", error);
+        callback?.(false, error);
+      },
+      () => {
+        console.log("Transaction successful for creating table");
+        callback?.(true, null);
+      },
+    );
+  } catch(error) {
+    console.error("Error opening SQLite database:", error);
+    Alert.alert("Database Error", "Failed to open the SQLite database.");
+  }
 }
 
 export function addReport(reportType, data, callback) {
