@@ -12,13 +12,7 @@ export function openDatabase() {
   }
 
   try {
-    if (typeof SQLite.openDatabaseSync === "function") {
-      return SQLite.openDatabaseSync("saved_reports.db");
-    } else if (typeof SQLite.openDatabase === "function") {
-      return SQLite.openDatabase("saved_reports.db");
-    } else {
-      throw new Error("Can't open database");
-    }
+    return SQLite.openDatabaseSync("saved_reports.db");
   } catch (error) {
     console.error("Error opening SQLite database:", error);
     Alert.alert("Database Error", "Failed to open the SQLite database.");
