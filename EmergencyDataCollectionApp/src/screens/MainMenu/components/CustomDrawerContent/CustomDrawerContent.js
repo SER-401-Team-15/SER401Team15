@@ -1,4 +1,5 @@
-import { Block, Text, theme } from "galio-framework";
+import { theme } from "galio-framework";
+import { Box, Text } from 'native-base';
 import React from "react";
 import { ScrollView, StyleSheet, Image } from "react-native";
 
@@ -20,14 +21,14 @@ function CustomDrawerContent({
     { title: "Credits", navigateTo: "Credits" },
   ];
   return (
-    <Block
+    <Box
       style={styles.container}
       forceInset={{ top: "always", horizontal: "never" }}
     >
-      <Block flex={0.06} style={styles.header}>
+      <Box flex={0.06} style={styles.header}>
         <Image style={styles.logo} source={Images.DrawerLogo} />
-      </Block>
-      <Block flex style={{ paddingLeft: 8, paddingRight: 14 }}>
+      </Box>
+      <Box flex style={{ paddingLeft: 8, paddingRight: 14 }}>
         <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
           {screens.map((item, index) => {
             return (
@@ -40,11 +41,11 @@ function CustomDrawerContent({
               />
             );
           })}
-          <Block
+          <Box
             flex
             style={{ marginTop: 24, marginVertical: 8, paddingHorizontal: 8 }}
           >
-            <Block
+            <Box
               style={{
                 borderColor: "rgba(0,0,0,0.2)",
                 width: "100%",
@@ -60,7 +61,7 @@ function CustomDrawerContent({
             >
               DOCUMENTATION
             </Text>
-          </Block>
+          </Box>
           <DrawerCustomItem
             title="Neighbor Check Website"
             navigation={navigation}
@@ -68,8 +69,8 @@ function CustomDrawerContent({
           <DrawerCustomItem title="Donation" navigation={navigation} />
           <DrawerCustomItem title="Source Code" navigation={navigation} />
         </ScrollView>
-      </Block>
-    </Block>
+      </Box>
+    </Box>
   );
 }
 

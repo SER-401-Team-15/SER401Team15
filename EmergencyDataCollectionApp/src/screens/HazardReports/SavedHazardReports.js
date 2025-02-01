@@ -2,8 +2,8 @@ import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import * as SQLite from "expo-sqlite";
 import React, { useEffect, useState } from "react";
-import { Alert } from "react-native";
 import {
+  Alert,
   View,
   Text,
   StyleSheet,
@@ -15,10 +15,9 @@ import {
 import Button from "./components/Button";
 let db;
 try {
-  db = SQLite.openDatabase("HazardReports.db");
+  db = SQLite.openDatabaseSync("HazardReports.db");
 } catch (error) {
   console.error("Error opening SQLite database:", error);
-  Alert.alert("Database Error", "Failed to open the SQLite database.");
 }
 
 const SavedHazardReports = () => {
@@ -51,25 +50,21 @@ const SavedHazardReports = () => {
   }, []);
 
   const fetchReports = () => {
-    db.transaction((tx) => {
-      tx.executeSql(
+      db.execSync(
         "SELECT * FROM HazardReport;",
         [],
         (_, { rows: { _array } }) => setHazardReports(_array),
         (_, error) => console.log("Report fetch error", error),
       );
-    });
   };
 
   const deleteReport = (id) => {
-    db.transaction((tx) => {
-      tx.executeSql(
+      db.execSync(
         "DELETE FROM HazardReport WHERE id = ?;",
         [id],
         fetchReports,
         (_, error) => console.log("Report delete error", error),
       );
-    });
   };
 
   const openEditModal = (report) => {

@@ -9,7 +9,8 @@ import {
   GlobeIcon,
   Icon,
 } from "@gluestack-ui/themed";
-import { Block, Text, theme } from "galio-framework";
+import { theme } from "galio-framework";
+import { Box, Text } from 'native-base';
 import React from "react";
 import { StyleSheet, TouchableOpacity, Linking } from "react-native";
 
@@ -22,7 +23,7 @@ class DrawerCustomItem extends React.Component {
     switch (title) {
       case "Home":
         return (
-          <Icon
+          <Text
             as={MenuIcon}
             size="md"
             color={focused ? "white" : Theme.COLORS.TEXT_BLACK}
@@ -30,7 +31,7 @@ class DrawerCustomItem extends React.Component {
         );
       case "Settings":
         return (
-          <Icon
+          <Text
             as={SettingsIcon}
             size="md"
             color={focused ? "white" : Theme.COLORS.TEXT_BLACK}
@@ -38,7 +39,7 @@ class DrawerCustomItem extends React.Component {
         );
       case "Instructions":
         return (
-          <Icon
+          <Text
             as={HelpCircleIcon}
             size="md"
             color={focused ? "white" : Theme.COLORS.TEXT_BLACK}
@@ -46,7 +47,7 @@ class DrawerCustomItem extends React.Component {
         );
       case "Credits":
         return (
-          <Icon
+          <Text
             as={GlobeIcon}
             size="md"
             color={focused ? "white" : Theme.COLORS.TEXT_BLACK}
@@ -54,7 +55,7 @@ class DrawerCustomItem extends React.Component {
         );
       case "Neighbor Check Website":
         return (
-          <Icon
+          <Text
             as={ExternalLinkIcon}
             size="md"
             color={focused ? "white" : Theme.COLORS.TEXT_BLACK}
@@ -62,7 +63,7 @@ class DrawerCustomItem extends React.Component {
         );
       case "Contribute":
         return (
-          <Icon
+          <Text
             as={StarIcon}
             size="md"
             color={focused ? "white" : Theme.COLORS.TEXT_BLACK}
@@ -70,7 +71,7 @@ class DrawerCustomItem extends React.Component {
         );
       case "Donation":
         return (
-          <Icon
+          <Text
             as={FavouriteIcon}
             size="md"
             color={focused ? "white" : Theme.COLORS.TEXT_BLACK}
@@ -78,7 +79,7 @@ class DrawerCustomItem extends React.Component {
         );
       case "Source Code":
         return (
-          <Icon
+          <Text
             as={ShareIcon}
             size="md"
             color={focused ? "white" : Theme.COLORS.TEXT_BLACK}
@@ -122,11 +123,11 @@ class DrawerCustomItem extends React.Component {
           }
         }}
       >
-        <Block flex row style={containerStyles}>
-          <Block middle flex={0.1} style={{ marginRight: 5 }}>
+        <Box flex row style={containerStyles}>
+          <Box middle flex={0.1} style={{ marginRight: 5 }}>
             {this.renderIcon()}
-          </Block>
-          <Block row center flex={0.9}>
+          </Box>
+          <Box row center flex={0.9}>
             <Text
               size={15}
               bold={!!focused}
@@ -134,8 +135,8 @@ class DrawerCustomItem extends React.Component {
             >
               {title}
             </Text>
-          </Block>
-        </Block>
+          </Box>
+        </Box>
       </TouchableOpacity>
     );
   }

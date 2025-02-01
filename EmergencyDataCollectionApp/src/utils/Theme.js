@@ -1,4 +1,4 @@
-export default {
+const Theme = {
   COLORS: {
     TEXT_BLACK: "#1C1C1E",
     TEXT_GREY: "#7D7D7D",
@@ -68,3 +68,5 @@ export default {
   },
   // ... Feel free to add more shared styles here
 };
+
+export default Theme;

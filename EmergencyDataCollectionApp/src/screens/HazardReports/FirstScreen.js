@@ -82,10 +82,10 @@ function FirstScreen() {
     if (!hazardReport.info.startTime) {
       setHazardReport((prev) => ({
         ...prev,
-          info: {
-            ...prev.info,
-            startTime: startTime,
-          },
+        info: {
+          ...prev.info,
+          startTime,
+        },
       }));
       // requiredFieldsList.push("► 1. Start Time");
     }
