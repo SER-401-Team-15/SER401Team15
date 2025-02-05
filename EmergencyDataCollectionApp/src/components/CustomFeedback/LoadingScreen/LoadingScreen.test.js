@@ -29,8 +29,8 @@ describe("LoadingScreen Component", () => {
   });
 
   it("does not display the modal when isVisible is false", () => {
-    const { getByTestId } = renderComponent(false);
-    expect(getByTestId("loading-screen-modal").props.visible).toBe(false);
+    const { queryByTestId } = renderComponent(false);
+    expect(queryByTestId("loading-screen-modal")).toBeNull();
   });
 
   it("has the expected style applied", () => {

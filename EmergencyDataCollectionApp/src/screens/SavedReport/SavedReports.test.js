@@ -15,6 +15,11 @@ describe("Mock Data Import Test", () => {
     expect(mockReportsData).toBeDefined();
   });
 });
+jest.mock('expo-font', () => ({
+  loadAsync: jest.fn().mockResolvedValue(true),
+  isLoaded: jest.fn().mockReturnValue(true),
+  loadedNativeFonts: [],
+}));
 
 describe("ReportItem", () => {
   const mockFireReport = {
