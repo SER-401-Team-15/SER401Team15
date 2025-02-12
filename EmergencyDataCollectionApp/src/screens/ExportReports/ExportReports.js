@@ -146,7 +146,7 @@ const ExportReports = () => {
             renderItem={({ item }) => (
               <ReportButton
                 reportId={item.report_id}
-                startTime={item.report_data.info.startTime}
+                startTime={item.report_data?.info?.startTime}
                 reportAddress={getReportAddress(item)}
                 onCheck={handleCheckReport}
                 isChecked={!!checkedReports[item.report_id]}

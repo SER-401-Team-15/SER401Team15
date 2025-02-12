@@ -142,4 +142,66 @@ export function exportToCSV(data) {
   });
 }
 
-export default exportToCSV;
+export async function exportReportImages(data) {
+  let queryIds = data[0];
+  for (let i = 1; i < data.length; i++) {
+    queryIds += ",";
+    queryIds += data[i];
+  }
+  queryReportsByMultipleIds(data, async (fetchedReports) => {
+    console.log("Data from db: " + JSON.stringify(fetchedReports, null, 2));
+
+    const imageUris = fetchedReports.reduce((acc, report) => {
+      console.log("Processing report: ", report);
+      if (typeof report.image_paths === 'string') {
+        try {
+          const parsedPaths = JSON.parse(report.image_paths);
+          if (Array.isArray(parsedPaths)) {
+            console.log("Found image paths: ", parsedPaths);
+            return acc.concat(parsedPaths);
+          }
+        } catch (e) {
+          console.error("Error parsing image paths: ", e);
+        }
+      } else if (Array.isArray(report.image_paths)) {
+        console.log("Found image paths: ", report.image_paths);
+        return acc.concat(report.image_paths);
+      } else {
+        console.log("No image paths found in report: ", report);
+      }
+      return acc;
+    }, []);
+
+    console.log("Extracted image URIs: " + JSON.stringify(imageUris, null, 2));
+
+    if (imageUris.length === 0) {
+      console.log("No images", "No images found in selected reports.");
+      return;
+    }
+
+    try {
+      console.log("Checking image existence and preparing for export...");
+      for (const uri of imageUris) {
+        console.log(`Checking existence of image: ${uri}`);
+        const fileInfo = await FileSystem.getInfoAsync(uri);
+        if (!fileInfo.exists) {
+          console.warn(`Image not found: ${uri}`);
+          continue;
+        }
+
+        console.log(`Preparing image for export: ${uri}`);
+
+        if (await Sharing.isAvailableAsync()) {
+          await Sharing.shareAsync(uri);
+        } else {
+          console.log("Cannot share images on this device.");
+        }
+      }
+      console.log("Successfully Images exported!");
+    } catch (error) {
+      console.error("Error exporting images:", error);
+    }
+  });
+}
+
+export default {exportToCSV, exportReportImages};

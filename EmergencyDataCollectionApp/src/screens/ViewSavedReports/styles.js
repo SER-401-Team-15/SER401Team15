@@ -77,11 +77,13 @@ export default StyleSheet.create({
     borderRadius: Theme.RADIUS.BUTTON,
     paddingVertical: Theme.BUTTON_PADDING.VERTICAL,
     paddingHorizontal: Theme.BUTTON_PADDING.HORIZONTAL,
+    marginHorizontal: 50,
   },
   deleteButton: {
     backgroundColor: Theme.COLORS.BACKGROUND_YELLOW,
     borderRadius: Theme.RADIUS.BUTTON,
     paddingVertical: Theme.BUTTON_PADDING.VERTICAL,
     paddingHorizontal: Theme.BUTTON_PADDING.HORIZONTAL,
+    marginHorizontal: 50,
   },
 });

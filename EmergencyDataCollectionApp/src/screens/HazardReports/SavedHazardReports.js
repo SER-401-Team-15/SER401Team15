@@ -3,7 +3,6 @@ import { useNavigation } from "@react-navigation/native";
 import * as SQLite from "expo-sqlite";
 import React, { useEffect, useState } from "react";
 import {
-  Alert,
   View,
   Text,
   StyleSheet,
@@ -13,12 +12,7 @@ import {
 } from "react-native";
 
 import Button from "./components/Button";
-let db;
-try {
-  db = SQLite.openDatabaseSync("HazardReports.db");
-} catch (error) {
-  console.error("Error opening SQLite database:", error);
-}
+const db = SQLite.openDatabase("HazardReports.db");
 
 const SavedHazardReports = () => {
   const [hazardReports, setHazardReports] = useState([]);
@@ -50,21 +44,25 @@ const SavedHazardReports = () => {
   }, []);
 
   const fetchReports = () => {
-      db.execSync(
+    db.transaction((tx) => {
+      tx.executeSql(
         "SELECT * FROM HazardReport;",
         [],
         (_, { rows: { _array } }) => setHazardReports(_array),
         (_, error) => console.log("Report fetch error", error),
       );
+    });
   };
 
   const deleteReport = (id) => {
-      db.execSync(
+    db.transaction((tx) => {
+      tx.executeSql(
         "DELETE FROM HazardReport WHERE id = ?;",
         [id],
         fetchReports,
         (_, error) => console.log("Report delete error", error),
       );
+    });
   };
 
   const openEditModal = (report) => {

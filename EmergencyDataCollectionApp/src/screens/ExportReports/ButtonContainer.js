@@ -16,7 +16,7 @@ import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 
 import { removeReportById } from "../../utils/Database/OfflineSQLiteDB";
-import exportToCSV from "../../utils/Database/export";
+import {exportToCSV, exportReportImages} from "../../utils/Database/export";
 import Theme from "../../utils/Theme";
 import styles from "../ViewSavedReports/styles";
 
@@ -54,6 +54,23 @@ export const ButtonContainer = ({ reports }) => {
     setShowExportAlert(true);
   };
 
+  const handleExportImage = async () => {
+    for (const k in reports) {
+      if (reports[k.toString()]) {
+        try {
+          compileReports(exportReportImages);
+          setShowExportSuccessAlert(true);
+        } catch (e) {
+          console.log(e);
+          setShowExportErrorAlert(true);
+        }
+        return;
+      }
+    }
+    setShowExportAlert(true);
+  };
+  
+
   const handleDelete = () => {
     setShowConfirmDelete(false);
     for (const k in reports) {
@@ -69,7 +86,10 @@ export const ButtonContainer = ({ reports }) => {
     <>
       <View style={styles.buttonContainer}>
         <TouchableOpacity onPress={handleExport} style={styles.exportButton}>
-          <Text style={styles.selectAllButtonText}>Export</Text>
+          <Text style={styles.selectAllButtonText}>Export CSV</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleExportImage} style={styles.exportButton}>
+          <Text style={styles.selectAllButtonText}>Export Image</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => setShowConfirmDelete(true)}

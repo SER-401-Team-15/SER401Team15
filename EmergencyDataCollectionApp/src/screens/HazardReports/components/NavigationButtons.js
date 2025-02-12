@@ -38,7 +38,7 @@ const NavigationButtons = ({ validateData }) => {
   };
 
   const handleSavePress = () => {
-    addReport("Hazard", hazardReport);
+    addReport("Hazard", hazardReport, images);
     let fileName = "ReadyNeighborCustomName";
     if (hazardReport.info.hash !== 0 && hazardReport.info.hash !== null) {
       fileName = hazardReport.info.hash;
