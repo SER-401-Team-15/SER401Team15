@@ -123,7 +123,7 @@ class DrawerCustomItem extends React.Component {
           }
         }}
       >
-        <Box flex row style={containerStyles}>
+        <Box flex={1} row style={containerStyles}>
           <Box middle flex={0.1} style={{ marginRight: 5 }}>
             {this.renderIcon()}
           </Box>
