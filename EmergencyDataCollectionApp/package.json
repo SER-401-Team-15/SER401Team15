@@ -55,6 +55,7 @@
     "jotai": "^2.6.3",
     "lucide-react-native": "^0.365.0",
     "native-base": "^3.4.28",
+    "patch-package": "^8.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.72.10",
