@@ -1,5 +1,4 @@
-import { theme } from "galio-framework";
-import { Box, Text } from 'native-base';
+import { Block, Text, theme } from "galio-framework";
 import React from "react";
 import { ScrollView, StyleSheet, Image } from "react-native";
 
@@ -21,14 +20,14 @@ function CustomDrawerContent({
     { title: "Credits", navigateTo: "Credits" },
   ];
   return (
-    <Box
+    <Block
       style={styles.container}
       forceInset={{ top: "always", horizontal: "never" }}
     >
-      <Box flex={0.06} style={styles.header}>
+      <Block flex={0.06} style={styles.header}>
         <Image style={styles.logo} source={Images.DrawerLogo} />
-      </Box>
-      <Box flex={1} style={{ paddingLeft: 8, paddingRight: 14 }}>
+      </Block>
+      <Block flex={1}>
         <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
           {screens.map((item, index) => {
             return (
@@ -41,11 +40,11 @@ function CustomDrawerContent({
               />
             );
           })}
-          <Box
+          <Block
             flex = {1}
             style={{ marginTop: 24, marginVertical: 8, paddingHorizontal: 8 }}
           >
-            <Box
+            <Block
               style={{
                 borderColor: "rgba(0,0,0,0.2)",
                 width: "100%",
@@ -56,12 +55,12 @@ function CustomDrawerContent({
               color="#8898AA"
               style={{
                 marginTop: 16,
-                marginLeft: 8,
+                marginLeft: 8
               }}
             >
               DOCUMENTATION
             </Text>
-          </Box>
+          </Block>
           <DrawerCustomItem
             title="Neighbor Check Website"
             navigation={navigation}
@@ -69,14 +68,14 @@ function CustomDrawerContent({
           <DrawerCustomItem title="Donation" navigation={navigation} />
           <DrawerCustomItem title="Source Code" navigation={navigation} />
         </ScrollView>
-      </Box>
-    </Box>
+      </Block>
+    </Block>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
   },
   header: {
     paddingTop: theme.SIZES.BASE * 3,
