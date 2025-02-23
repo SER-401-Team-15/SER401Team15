@@ -6,7 +6,8 @@ import { queryReportsByMultipleIds } from "./OfflineSQLiteDB";
 
 async function writeFile(contents) {
   console.log(contents);
-  const fileName = FileSystem.documentDirectory + "exported-reports.csv";
+  const timestamp = new Date().toISOString().replace(/[:.-]/g, "_");
+  const fileName = FileSystem.documentDirectory + `exported-reports-${timestamp}.csv`;
   FileSystem.writeAsStringAsync(fileName, contents, {
     encoding: FileSystem.EncodingType.UTF8,
   });
@@ -22,44 +23,21 @@ async function writeFile(contents) {
     } else if (Platform.OS === "android") {
       const permissions =
         await FileSystem.StorageAccessFramework.requestDirectoryPermissionsAsync();
-        if (permissions.granted) {
-          try {
-            // Use the cache directory for temporary storage - this is more reliable
-            const tempFilePath = `${FileSystem.cacheDirectory}exported_data.csv`;
-            
-            // Create simple CSV content for testing
-            const csvContent = "Name,Age,Location\nJohn,30,New York\nSara,25,Chicago";
-            
-            // Write to the cache directory first
-            await FileSystem.writeAsStringAsync(tempFilePath, csvContent);
-            console.log("File written to cache: " + tempFilePath);
-            
-            // Now try to share from the cache
-            await Sharing.shareAsync(tempFilePath, {
-              mimeType: 'text/csv',
-              dialogTitle: 'View CSV File'
+      if (permissions.granted) {
+        await FileSystem.StorageAccessFramework.createFileAsync(
+          permissions.directoryUri,
+          `exported-reports-${timestamp}`,
+          "text/csv",
+        )
+          .then(async (fileName) => {
+            await FileSystem.writeAsStringAsync(fileName, contents, {
+              encoding: FileSystem.EncodingType.UTF8,
             });
-            
-            console.log("Share operation completed");
-            
-            // If that worked, then try to save to the permanent location
-            if (permissions.directoryUri) {
-              const permanentFile = await FileSystem.StorageAccessFramework.createFileAsync(
-                permissions.directoryUri,
-                "exported-reports",
-                "text/csv"
-              );
-              
-              // Copy from cache to permanent storage
-              await FileSystem.writeAsStringAsync(permanentFile, csvContent);
-              console.log("File also saved permanently to: " + permanentFile);
-            }
-          } catch (error) {
-            console.error("Error details:", error);
-          }
-        } else {
-          console.log("Permission not granted");
-        }
+          })
+          .catch((e) => console.log(e));
+      } else {
+        Sharing.shareAsync(fileName);
+      }
     } else {
       Sharing.shareAsync(fileName);
     }

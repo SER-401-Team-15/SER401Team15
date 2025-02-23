@@ -2,7 +2,7 @@
   "expo": {
     "name": "EmergencyDataCollectionApp",
     "slug": "EmergencyDataCollectionApp",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/appicon.png",
     "userInterfaceStyle": "light",
@@ -18,9 +18,11 @@
       "supportsTablet": true,
       "infoPlist": {
         "NSPhotoLibraryUsageDescription": "Allow $(PRODUCT_NAME) to access your photos.",
-        "NSPhotoLibraryAddUsageDescription": "Allow $(PRODUCT_NAME) to save photos."
+        "NSPhotoLibraryAddUsageDescription": "Allow $(PRODUCT_NAME) to save photos.",
+        "ITSAppUsesNonExemptEncryption": false
       },
-      "bundleIdentifier": "com.shunt161.EmergencyDataCollectionApp"
+      "bundleIdentifier": "com.shunt161.EmergencyDataCollectionApp",
+      "buildNumber": "2"
     },
     "android": {
       "versionCode": 2,
@@ -70,6 +72,11 @@
           "isAccessMediaLocationEnabled": true
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "1a9a31a9-45ad-44e7-987d-c853997aebc5"
+      }
+    }
   }
 }
