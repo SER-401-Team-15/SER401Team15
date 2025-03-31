@@ -78,5 +78,8 @@
     "eslint-plugin-jest": "^27.6.0",
     "prettier": "^3.0.3"
   },
-  "private": true
+  "private": true,
+  "overrides": {
+    "react-native-reanimated": "~3.3.0"
+  }
 }
