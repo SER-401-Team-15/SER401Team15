@@ -1,7 +1,8 @@
 import * as ImagePicker from "expo-image-picker";
 import * as MediaLibrary from "expo-media-library";
 import React, { useState } from "react";
-import { View } from "react-native";
+import { View, Platform, Alert } from "react-native";
+import Constants from "expo-constants";
 
 import CustomImageButton from "../CustomImageButton/CustomImageButton";
 
@@ -12,22 +13,60 @@ export default function CustomCamera({ setImage }) {
   const handlePressOut = () => setIsPressed(false);
 
   const getPermissionAsync = async () => {
-    const { status } = await MediaLibrary.requestPermissionsAsync();
-    if (status !== "granted") {
-      alert("Camera permissions are required");
+    // Request camera permissions
+    const cameraPermission = await ImagePicker.requestCameraPermissionsAsync();
+    if (cameraPermission.status !== "granted") {
+      Alert.alert("Permission required", "Camera access is required to take photos");
+      return false;
     }
+    
+    // Request media library permissions
+    const mediaLibraryPermission = await MediaLibrary.requestPermissionsAsync();
+    if (mediaLibraryPermission.status !== "granted") {
+      Alert.alert("Permission required", "Media library access is required to save photos");
+      return false;
+    }
+    
+    return true;
+  }
+
+  const isSimulator = () => {
+    return (
+      Platform.OS === 'ios' && 
+      !Platform.isPad && 
+      !Platform.isTVOS && 
+      (Constants.platform?.ios?.model?.includes('Simulator') || 
+       Constants.executionEnvironment === 'simulator')
+    );
   };
 
   const takePicture = async () => {
-    await getPermissionAsync();
-
-    const result = await ImagePicker.launchCameraAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      quality: 1,
-    });
-
-    if (!result.canceled) {
-      setImage(result.assets[0].uri);
+    if (isSimulator()) {
+      Alert.alert(
+        "Simulator Detected",
+        "Camera is not available in iOS simulator. Please use a physical device or choose 'Upload Photo' instead.",
+        [{ text: "OK" }]
+      );
+      return;
+    }
+  
+    const hasPermissions = await getPermissionAsync();
+    if (!hasPermissions) return;
+  
+    try {
+      const result = await ImagePicker.launchCameraAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: false,
+        quality: 1,
+        aspect: [4, 3],
+      });
+  
+      if (!result.canceled && result.assets && result.assets.length > 0) {
+        setImage(result.assets[0].uri);
+      }
+    } catch (error) {
+      console.error("Error taking picture:", error);
+      Alert.alert("Error", "There was a problem taking the picture. Please try again.");
     }
   };
 
