@@ -78,14 +78,18 @@ export function addReport(reportType, data, imageUris = [], callback) {
     callback?.(false, "Report type or data is empty");
     return;
   }
+  
+  const cleanedData = sanitizeReportData(reportType, data);
+  
   const imagePaths = imageUris ? JSON.stringify(imageUris.map(uri => uri.replace(/'/g, "''"))) : null; 
   console.log("imagePaths", imagePaths);
 
   db.transaction(
     (tx) => {
+      console.log("Adding report to database", reportType, cleanedData);
       tx.executeSql(
         "insert into reports (report_type, report_data, image_paths) values (?, ?, ?)",
-        [reportType, JSON.stringify(data), imagePaths],
+        [reportType, JSON.stringify(cleanedData), imagePaths],
         () => {
           console.log("Report added successfully");
           callback?.(true, null);
@@ -412,3 +416,29 @@ export const fetchHazardReports = (callback) => {
     );
   });
 };
+
+function sanitizeReportData(reportType, data) {
+  const cleanedData = JSON.parse(JSON.stringify(data));
+  
+  if (reportType === 'HAZARD' || reportType === 'Hazard') {
+    if (cleanedData.info) {
+      cleanedData.info.groupName = '';
+      cleanedData.info.squadName = '';
+    }
+  }
+  
+  function removeEmptyStringFields(obj) {
+    if (!obj || typeof obj !== 'object') return;
+    
+    Object.keys(obj).forEach(key => {
+      if (obj[key] === '') {
+        delete obj[key];
+      } else if (typeof obj[key] === 'object') {
+        removeEmptyStringFields(obj[key]);
+      }
+    });
+  }
+  
+  removeEmptyStringFields(cleanedData);
+  return cleanedData;
+}

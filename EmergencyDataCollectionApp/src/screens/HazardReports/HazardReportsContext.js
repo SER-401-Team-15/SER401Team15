@@ -21,11 +21,13 @@ export const HazardReportProvider = ({ children }) => {
   const [hazardReports, setHazardReports] = useState([hazardReport]);
 
   const saveHazardReport = (data) => {
+    console.log("Saving hazard report", data);
     setHazardReport(data);
     setHazardReports((prevReports) => [...prevReports, data]);
   };
 
   const saveHazardReportToDB = (data) => {
+    console.log("Saving hazard report to DB", data);
     addReport("Hazard", data, (success, error) => {
       if (success) {
         console.log("Hazard report added successfully");
