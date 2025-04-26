@@ -60,17 +60,30 @@ export function setupDatabase(callback) {
     },
   );
 }
-function addImagePathsColumn() {
-  db.transaction(tx=>
-    tx.executeSql(
-    "ALTER TABLE reports ADD COLUMN image_paths TEXT;",
-    [],
-    () => console.log("`image_paths` column added successfully!"),
-    (_, error) => console.error(" Error adding `image_paths` column:", error)
-  )
-);
-}
 
+function addImagePathsColumn() {
+  db.transaction(tx => {
+    tx.executeSql(
+      "PRAGMA table_info(reports);",
+      [],
+      (_, { rows: { _array } }) => {
+        const columnExists = _array.some(column => column.name === "image_paths");
+        
+        if (!columnExists) {
+          tx.executeSql(
+            "ALTER TABLE reports ADD COLUMN image_paths TEXT;",
+            [],
+            () => console.log("`image_paths` column added successfully!"),
+            (_, error) => console.error("Error adding `image_paths` column:", error)
+          );
+        } else {
+          console.log("`image_paths` column already exists.");
+        }
+      },
+      (_, error) => console.error("Error checking columns:", error)
+    );
+  });
+}
 
 export function addReport(reportType, data, imageUris = [], callback) {
   if (!reportType || !data) {
