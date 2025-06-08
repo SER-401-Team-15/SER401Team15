@@ -23,7 +23,7 @@
         "ITSAppUsesNonExemptEncryption": false
       },
       "bundleIdentifier": "com.shunt161.EmergencyDataCollectionApp",
-      "buildNumber": "2"
+      "buildNumber": "3"
     },
     "android": {
       "versionCode": 5,
@@ -73,7 +73,15 @@
           "savePhotosPermission": "Allow $(PRODUCT_NAME) to save photos.",
           "isAccessMediaLocationEnabled": true
         }
-      ]
+      ],
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "otherCPlusPlusFlags": "-D_FMT_CHAR8_T=0"
+          }
+        }
+      ]      
     ],
     "extra": {
       "eas": {
