@@ -23,7 +23,7 @@
         "ITSAppUsesNonExemptEncryption": false
       },
       "bundleIdentifier": "com.shunt161.EmergencyDataCollectionApp",
-      "buildNumber": "3"
+      "buildNumber": "4"
     },
     "android": {
       "versionCode": 5,
@@ -78,7 +78,10 @@
         "expo-build-properties",
         {
           "ios": {
-            "otherCPlusPlusFlags": "-D_FMT_CHAR8_T=0"
+            "otherCPlusPlusFlags": "-D_FMT_CHAR8_T=0",
+            "buildSettings": {
+              "EXCLUDED_ARCHS[sdk=iphonesimulator*]": "arm64 x86_64"
+            }
           }
         }
       ]      

@@ -5,7 +5,7 @@ import { Platform } from "react-native";
 import { queryReportsByMultipleIds } from "./OfflineSQLiteDB";
 
 async function writeFile(contents) {
-  console.log(contents);
+  console.log("We are writing to file: ", contents);
   const timestamp = new Date().toISOString().replace(/[:.-]/g, "_");
   const fileName = FileSystem.documentDirectory + `exported-reports-${timestamp}.csv`;
   FileSystem.writeAsStringAsync(fileName, contents, {
@@ -66,13 +66,9 @@ function buildString(reports) {
       csvString += report_data.info.startTime + ",";
       csvString += report_data.info.groupName + ",";
       csvString += report_data.info.squadName + ",";
-      if (element.report_type === "CERT") {
-        csvString += report_data.info.numberOfVisit + ",";
-        csvString += report_data.info.roadCondition + ",";
-      } else {
-        csvString += report_data.location.numberOfVisit + ",";
-        csvString += report_data.location.roadCondition + ",";
-      }
+      // Always access these fields from location, regardless of report type
+      csvString += (report_data.location.numberOfVisit || "") + ",";
+      csvString += (report_data.location.roadCondition || "") + ",";
 
       if (element.report_type !== "Hazard") {
         csvString +=
@@ -91,8 +87,8 @@ function buildString(reports) {
       csvString += report_data.location.latitude + ",";
       csvString += report_data.location.longitude + ",";
       csvString += report_data.location.accuracy + ",";
-      csvString += report_data.hazard.structureType + ",";
-      csvString += report_data.hazard.structureCondition + ",";
+      csvString += (report_data.hazard?.structureType || "") + ",";
+      csvString += (report_data.hazard?.structureCondition || "") + ",";
       csvString += report_data.hazard.hazardFire + ",";
       csvString += report_data.hazard.hazardPropane + ",";
       csvString += report_data.hazard.hazardWater + ",";
@@ -138,6 +134,7 @@ export function exportToCSV(data) {
   queryReportsByMultipleIds(data, (fetchedReports) => {
     console.log("Data from db: " + JSON.stringify(fetchedReports, null, 2));
     buildString(fetchedReports).then((csvString) => {
+      console.log("CSV String: " + csvString);
       writeFile(csvString);
     });
   });
