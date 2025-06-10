@@ -23,7 +23,7 @@
         "ITSAppUsesNonExemptEncryption": false
       },
       "bundleIdentifier": "com.shunt161.EmergencyDataCollectionApp",
-      "buildNumber": "4"
+      "buildNumber": "5"
     },
     "android": {
       "versionCode": 5,
