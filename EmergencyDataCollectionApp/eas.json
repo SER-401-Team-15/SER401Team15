@@ -1,6 +1,7 @@
 {
   "cli": {
-    "version": ">= 7.8.2"
+    "version": ">= 7.8.2",
+    "appVersionSource": "remote"
   },
   "build": {
     "development": {
@@ -12,7 +13,8 @@
     },
     "production": {
       "ios": {
-        "image": "latest"
+        "image": "latest",
+        "autoIncrement": true
       }
     }
   },

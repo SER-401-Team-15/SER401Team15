@@ -32,6 +32,12 @@ export default StyleSheet.create({
     height: (width * 0.7) / 1.3,
     borderRadius: Theme.RADIUS.IMAGE,
   },
+  image2: {
+    width: width * 0.5,
+    height: (width * 0.5) / 1.0,
+    marginTop: height * 0.09,
+    borderRadius: Theme.RADIUS.IMAGE,
+  },
   title: {
     fontSize: Theme.TYPOGRAPHY.FONT_SIZE.XLARGE,
     fontWeight: Theme.TYPOGRAPHY.FONT_WEIGHT.BOLD,

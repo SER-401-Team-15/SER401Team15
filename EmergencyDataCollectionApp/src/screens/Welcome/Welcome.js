@@ -19,9 +19,16 @@ const Welcome = ({ navigation }) => {
           testID="welcomeImage"
         />
       </View>
-      <View style={styles.textContainer}>
+      <View style={styles.imageContainer}>
+      <Image
+        source={Images.cleanLogo}
+        style={styles.image2}
+        testID="cleanLogoImage"
+      />
+    </View>
+      {/* <View style={styles.textContainer}>
         <Text style={styles.title}>Neighbor Check</Text>
-      </View>
+      </View> */}
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           style={styles.button}
