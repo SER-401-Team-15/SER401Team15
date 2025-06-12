@@ -33,6 +33,13 @@ const CreditsPage = () => {
       <Text style={styles.text}>Name: Sheldon Pang</Text>
       <Text style={styles.text}>Email: sheldonpang@asu.edu</Text>
       <Text style={styles.text} />
+      <Text style={styles.placehodler}>Further Development and completion in 2025:</Text>
+      <Text style={styles.text} />
+      <Text style={styles.text}>Name: Sahil Tarun Parwani</Text>
+      <Text style={styles.text}>Email: sparwan1@asu.edu</Text>
+      <Text style={styles.text} />
+      <Text style={styles.text}>Name: Akshata Vijay Kulkarni</Text>
+      <Text style={styles.text}>Email: akulka89@asu.edu</Text>
     </View>
   );
 };
