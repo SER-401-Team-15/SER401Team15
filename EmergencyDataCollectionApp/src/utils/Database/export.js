@@ -230,16 +230,9 @@ function buildString(reports) {
       }
       csvString += notes + ",";
       
-      // Photo_Links
-      if (element.report_type === "Hazard") {
-        const photoLink =
-          report_data.hazardPicture && report_data.hazardPicture.number > 0
-            ? `${report_data.info.hash}_${report_data.hazardPicture.number}.jpeg`
-            : "";
-        csvString += photoLink + ",";
-      } else {
-        csvString += (report_data.info.hash || "") + ",";
-      }
+      // Photo_Links column logic
+      let photoLink = report_data.info.hash;
+      csvString += (photoLink || "") + ",";
       
       // Date_Time_End
       csvString += (report_data.info.endTime || "") + ",";
