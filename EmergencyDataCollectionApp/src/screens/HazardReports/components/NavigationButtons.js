@@ -38,11 +38,14 @@ const NavigationButtons = ({ validateData }) => {
   };
 
   const handleSavePress = () => {
-    // Update hazard report with image count before saving
     const updatedReport = {
       ...hazardReport,
       hazardPicture: {
-        number: images.length  // Update the number of images
+        number: images.length,  // Records total number of pictures in database
+      },
+      info: {
+        ...hazardReport.info,
+        imageNames: images.map((_, index) => `${hazardReport.info.hash}_${index + 1}`) // Creates consistent naming
       }
     };
     

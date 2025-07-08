@@ -1,5 +1,5 @@
 import { Box } from "@gluestack-ui/themed";
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { KeyboardAvoidingView } from "native-base";
 import React, { useState, useEffect } from "react";
 import { Platform, ScrollView } from "react-native";
@@ -10,11 +10,11 @@ import CustomDateTimePickerComponent from "../../components/CustomForms/CustomDa
 import CustomTextArea from "../../components/CustomForms/NativeBase/CustomTextArea/CustomTextArea";
 import EverythingCamera from "../../components/EverythingCamera/EverythingCamera";
 import LineSeparator from "../../components/LineSeparator/LineSeparator";
-import { useAtomValue } from "jotai";
 
 export default function SecondScreen() {
   const [hazardReport, setHazardReport] = useAtom(hazardReportAtom);
   const [hazardTabsStatus, setHazardTabsStatus] = useAtom(hazardTabsStatusAtom);
+  const images = useAtomValue(imagesAtom); // Move this to component level
   const [inputText] = useState("");
   const [endTime, setEndTime] = useState(new Date());
 
@@ -40,10 +40,10 @@ export default function SecondScreen() {
 
     setHazardReport((prev) => ({
       ...prev,
-        info: {
-          ...prev.info,
-          endTime: endTime,
-        },
+      info: {
+        ...prev.info,
+        endTime: endTime,
+      },
     }));
 
     const currentTabIndex = hazardTabsStatus.tabIndex;
@@ -54,16 +54,15 @@ export default function SecondScreen() {
     }));
   };
 
-  // Add this effect to update hazardPicture.number when images change
+  // Update hazardPicture.number when images change
   useEffect(() => {
-    const images = useAtomValue(imagesAtom);
     setHazardReport((prev) => ({
       ...prev,
       hazardPicture: {
         number: images.length
       }
     }));
-  }, [images]);
+  }, [images, setHazardReport]);
 
   return (
     <>
