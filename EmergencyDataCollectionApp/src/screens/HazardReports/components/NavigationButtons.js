@@ -38,10 +38,18 @@ const NavigationButtons = ({ validateData }) => {
   };
 
   const handleSavePress = () => {
-    addReport("Hazard", hazardReport, images);
+    // Update hazard report with image count before saving
+    const updatedReport = {
+      ...hazardReport,
+      hazardPicture: {
+        number: images.length  // Update the number of images
+      }
+    };
+    
+    addReport("Hazard", updatedReport, images);
     let fileName = "ReadyNeighborCustomName";
-    if (hazardReport.info.hash !== 0 && hazardReport.info.hash !== null) {
-      fileName = hazardReport.info.hash;
+    if (updatedReport.info.hash !== 0 && updatedReport.info.hash !== null) {
+      fileName = updatedReport.info.hash;
     }
     if (Array.isArray(images) && images.length > 0) {
       saveImages(images, fileName).then((r) => console.log("saved", r));

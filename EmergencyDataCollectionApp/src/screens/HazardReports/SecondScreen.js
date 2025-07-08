@@ -1,15 +1,16 @@
 import { Box } from "@gluestack-ui/themed";
 import { useAtom } from "jotai";
 import { KeyboardAvoidingView } from "native-base";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Platform, ScrollView } from "react-native";
 
-import { hazardReportAtom, hazardTabsStatusAtom } from "./HazardPageAtoms";
+import { hazardReportAtom, hazardTabsStatusAtom, imagesAtom } from "./HazardPageAtoms";
 import NavigationButtons from "./components/NavigationButtons";
 import CustomDateTimePickerComponent from "../../components/CustomForms/CustomDateTimePickerComponent/CustomDateTimePickerComponent";
 import CustomTextArea from "../../components/CustomForms/NativeBase/CustomTextArea/CustomTextArea";
 import EverythingCamera from "../../components/EverythingCamera/EverythingCamera";
 import LineSeparator from "../../components/LineSeparator/LineSeparator";
+import { useAtomValue } from "jotai";
 
 export default function SecondScreen() {
   const [hazardReport, setHazardReport] = useAtom(hazardReportAtom);
@@ -52,6 +53,17 @@ export default function SecondScreen() {
       tabIndex: currentTabIndex + 1,
     }));
   };
+
+  // Add this effect to update hazardPicture.number when images change
+  useEffect(() => {
+    const images = useAtomValue(imagesAtom);
+    setHazardReport((prev) => ({
+      ...prev,
+      hazardPicture: {
+        number: images.length
+      }
+    }));
+  }, [images]);
 
   return (
     <>
