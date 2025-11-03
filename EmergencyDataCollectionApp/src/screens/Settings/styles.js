@@ -3,11 +3,14 @@ import { StyleSheet } from "react-native";
 import Theme from "../../utils/Theme";
 
 const styles = StyleSheet.create({
+  scrollViewContent: {
+    flexGrow: 1,
+    paddingBottom: 50, // Add bottom padding to ensure content doesn't get cut off
+  },
   container: {
-    flex: 1,
     padding: 16,
-    justifyContent: "flex-start",
     marginTop: 15,
+    minHeight: '100%', // Ensure it takes up the full height but doesn't force unnecessary spacing
   },
   header: {
     fontSize: 24,
@@ -15,11 +18,15 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginBottom: 16,
   },
+  formSection: {
+    marginBottom: 20, // Add spacing between form sections
+  },
   buttonContainer: {
     flexDirection: "row",
     justifyContent: "space-evenly",
-    paddingVertical: 10,
+    paddingVertical: 20,
     gap: 10,
+    marginTop: 30, // Add margin to separate from form fields
   },
   button: {
     flex: 1,
@@ -44,6 +51,9 @@ const styles = StyleSheet.create({
   },
   text: {
     color: Theme.COLORS.TEXT_BLACK,
+  },
+  input: {
+    marginBottom: 15, // Add spacing between input fields
   },
 });
 

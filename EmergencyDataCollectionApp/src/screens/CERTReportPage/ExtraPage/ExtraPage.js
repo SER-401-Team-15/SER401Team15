@@ -86,10 +86,13 @@ const NotePage = () => {
             isRequired
           />
           <CustomTextArea
-            label="2. Additional Notes:"
+            label="2. Additional notes: 300 character maximum"
             placeholder="Any additional notes you would like to add?"
             value={certReport.note.NotesTextArea}
             onChangeText={handleNotesChange}
+            maxLength={300}
+            showCharacterCount={true}
+            showCompleteButton={true}
             testID="cert-report-note-page-additional-notes-textarea"
             formControlProps={{
               marginTop: 2,

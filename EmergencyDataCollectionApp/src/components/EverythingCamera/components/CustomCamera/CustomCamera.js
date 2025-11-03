@@ -30,14 +30,14 @@ export default function CustomCamera({ setImage }) {
     return true;
   }
 
+  // More reliable simulator detection
   const isSimulator = () => {
-    return (
-      Platform.OS === 'ios' && 
-      !Platform.isPad && 
-      !Platform.isTVOS && 
-      (Constants.platform?.ios?.model?.includes('Simulator') || 
-       Constants.executionEnvironment === 'simulator')
-    );
+    if (Platform.OS === 'ios') {
+      return !Constants.isDevice || 
+             Constants.platform?.ios?.model?.includes('Simulator') || 
+             Constants.executionEnvironment === 'simulator';
+    }
+    return false;
   };
 
   const takePicture = async () => {

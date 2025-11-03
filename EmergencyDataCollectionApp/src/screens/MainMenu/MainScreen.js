@@ -60,12 +60,12 @@ const MainScreen = () => {
               fontSize: Theme.TYPOGRAPHY.FONT_SIZE.MED_LARGE,
             }}
           >
-            Report an emergency
+            Start a report
           </Text>
         </Box>
         <View style={styles.buttonContainer}>
           <CustomButton
-            title="New Ready Neighbor Report"
+            title="New READYNEIGHBOR Report"
             onPress={handleStartNewMYNReport}
             buttonStyle={styles.buttonStyleWide}
             textStyle={styles.textStyle}

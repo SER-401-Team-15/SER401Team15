@@ -1,6 +1,5 @@
 # Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
-echo ".DS_Store" >> .gitignore
-echo "**/.DS_Store" >> .gitignore
+
 # dependencies
 node_modules/
 
@@ -27,10 +26,12 @@ yarn-error.*
 
 # macOS
 .DS_Store
+**/.DS_Store
 *.pem
 
 # local env files
 .env*.local
+ios/.xcode.env.local
 
 # typescript
 *.tsbuildinfo
@@ -51,3 +52,6 @@ coverage/
 
 # Build artifacts
 build/
+
+# Package manager lock files (using npm, so ignore yarn.lock)
+yarn.lock

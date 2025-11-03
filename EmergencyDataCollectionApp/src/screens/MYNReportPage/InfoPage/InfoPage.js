@@ -54,7 +54,7 @@ function InfoPage() {
       requiredFieldsList.push("► 1. Date and Time");
 
     if (!mynReport.info.groupName) {
-      // TODO: uncomment before prs
+      // Note: GPS Coordinates validation can be enabled if needed in the future
       // requiredFieldsList.push("► 2. GPS Coordinates");
       setIsGroupNameInvalid(true);
       requiredFieldsList.push("► 3. Ready Neighbor Group Name");

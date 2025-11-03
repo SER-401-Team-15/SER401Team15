@@ -9,7 +9,7 @@ export const StructureType = [
 
 export const StructureCondition = [
   { label: "Habitable(Can have some damage)", value: "H" },
-  { label: "Affected(Books off shelves ect)", value: "A" },
+  { label: "Affected(Books off shelves Etc)", value: "A" },
   { label: "Minor(<30 days to repair)", value: "M" },
   { label: "Major(>30 days to repair)", value: "MJR" },
   { label: "Destroyed(Off foundation or pancaked)", value: "D" },

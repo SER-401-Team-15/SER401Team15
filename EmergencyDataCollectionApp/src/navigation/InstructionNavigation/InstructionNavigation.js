@@ -16,15 +16,19 @@ function InstructionNavigation({ navigation }) {
       <Tab.Navigator
         screenOptions={{
           tabBarActiveTintColor: "#111111",
-          tabBarLabelStyle: { fontSize: 8, textAlignVertical: "bottom" },
+          tabBarLabelStyle: { 
+            fontSize: 14, 
+            fontWeight: "bold",
+            textAlignVertical: "bottom" 
+          },
           tabBarStyle: { backgroundColor: "#ffcc00", height: "10%" },
         }}
       >
-        <Tab.Screen name="Basic" component={HomeInstructions} />
+        <Tab.Screen name="BASIC" component={HomeInstructions} />
         <Tab.Screen name="CERT" component={CERTInstructions} />
-        <Tab.Screen name="Ready Neighbor" component={MYNInstructions} />
-        <Tab.Screen name="Hazzard" component={HazzardInstructions} />
-        <Tab.Screen name="UpLoad Files" component={UpLoadInstructions} />
+        <Tab.Screen name="READY NEIGHBOR" component={MYNInstructions} />
+        <Tab.Screen name="HAZARD" component={HazzardInstructions} />
+        <Tab.Screen name="UPLOAD FILES" component={UpLoadInstructions} />
       </Tab.Navigator>
     </View>
   );

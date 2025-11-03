@@ -257,7 +257,7 @@ const LocationPage = () => {
               paddingBottom: 3,
             }}
           />
-          {/* TODO - implement Zip code validation */}
+          {/* Note: Zip code validation is a future enhancement */}
           <CustomInput
             label="7. Zip"
             placeholder="Enter the zip code"

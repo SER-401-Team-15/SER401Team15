@@ -10,7 +10,8 @@
     "test": "jest",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package && node fix-simulator-issue.js",
+    "fix-simulator": "node fix-simulator-issue.js"
   },
   "jest": {
     "preset": "jest-expo",

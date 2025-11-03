@@ -22,6 +22,7 @@ const CertReview = ({ report }) => {
   const certReport = report.report_data;
 
   const getLabelFromList = (value, list) => {
+    if (!value || value === "") return "undefined";
     const item = list.find((item) => item.value === value);
     return item ? item.label : value;
   };
@@ -43,29 +44,29 @@ const CertReview = ({ report }) => {
             <Text>{`Start Time: ${formatDate(
               certReport.info.startTime,
             )}`}</Text>
-            <Text>{`CERT Group Name: ${certReport.info.groupName}`}</Text>
-            <Text>{`CERT Squad Name: ${certReport.info.squadName}`}</Text>
+            <Text>{`CERT Group Name: ${certReport.info.groupName || 'undefined'}`}</Text>
+            <Text>{`CERT Squad Name: ${certReport.info.squadName || 'undefined'}`}</Text>
             <Text>{`Visit Number: ${getLabelFromList(
-              certReport.info.numberOfVisit,
+              certReport.location.numberOfVisit,
               visitNumbers,
             )}`}</Text>
             <Text>{`Road Access: ${getLabelFromList(
-              certReport.info.roadCondition,
+              certReport.location.roadCondition,
               RoadCondition,
             )}`}</Text>
           </View>
 
           <Text style={styles.boldText}>Location:</Text>
           <View style={styles.box}>
-            <Text>{`GPS: ${certReport.location.latitude}, ${certReport.info.longitude}`}</Text>
+            <Text>{`GPS: ${certReport.location.latitude}, ${certReport.location.longitude}`}</Text>
             <Text>{`Accuracy: ${certReport.location.accuracy} meters`}</Text>
-            <Text>{`Location Address: ${certReport.location.address}`}</Text>
+            <Text>{`Location Address: ${certReport.location.address || 'undefined'}`}</Text>
             <Text>{`Structure Type: ${getLabelFromList(
-              certReport.location.structureType,
+              certReport.hazard.structureType,
               StructureType,
             )}`}</Text>
             <Text>{`Structure Condition: ${getLabelFromList(
-              certReport.location.structureCondition,
+              certReport.hazard.structureCondition,
               StructureCondition,
             )}`}</Text>
           </View>
@@ -96,19 +97,19 @@ const CertReview = ({ report }) => {
 
           <Text style={styles.boldText}>Personnel:</Text>
           <View style={styles.box}>
-            <Text>{`Rescued People Green: ${certReport.people.greenPersonal}`}</Text>
-            <Text>{`Rescued People Yellow: ${certReport.people.yellowPersonal}`}</Text>
-            <Text>{`Rescued People Red: ${certReport.people.redPersonal}`}</Text>
-            <Text>{`People Trapped: ${certReport.people.trappedPersonal}`}</Text>
-            <Text>{`People Need Shelter: ${certReport.people.personalRequiringShelter}`}</Text>
-            <Text>{`Deceased People: ${certReport.people.deceasedPersonal}`}</Text>
-            <Text>{`Deceased People Location: ${certReport.people.deceasedPersonalLocation}`}</Text>
+            <Text>{`Rescued People Green: ${certReport.people.greenPersonal || 'undefined'}`}</Text>
+            <Text>{`Rescued People Yellow: ${certReport.people.yellowPersonal || 'undefined'}`}</Text>
+            <Text>{`Rescued People Red: ${certReport.people.redPersonal || 'undefined'}`}</Text>
+            <Text>{`People Trapped: ${certReport.people.trappedPersonal || 'undefined'}`}</Text>
+            <Text>{`People Need Shelter: ${certReport.people.personalRequiringShelter || 'undefined'}`}</Text>
+            <Text>{`Deceased People: ${certReport.people.deceasedPersonal || 'undefined'}`}</Text>
+            <Text>{`Deceased People Location: ${certReport.people.deceasedPersonalLocation || 'undefined'}`}</Text>
           </View>
 
           <Text style={styles.boldText}>Notes:</Text>
           <View style={styles.box}>
-            <Text>{`Notes: ${certReport.note.NotesTextArea}`}</Text>
-            {certReport.certPicture.number > 0 && (
+            <Text>{`Notes: ${certReport.note.NotesTextArea || 'undefined'}`}</Text>
+            {certReport.certPicture && certReport.certPicture.number > 0 && (
               <Text>{`Picture: ${
                 certReport.info.hash +
                 "_" +

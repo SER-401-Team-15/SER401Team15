@@ -55,21 +55,33 @@ const CustomDateTimePickerComponent = ({
         </TouchableOpacity>
       </View>
 
-      <View>
-        {showPicker && (
-          <DateTimePicker
-            testID={testIdDateTimePicker}
-            value={value || new Date()}
-            mode={isDatePicker ? "date" : "time"}
-            is24Hour={is24Hour}
-            display="default"
-            onChange={(event, date) => {
-              setShowPicker(false);
-              handleDataTimeChange(event, date);
-            }}
-          />
-        )}
-      </View>
+      {showPicker && isDatePicker && (
+        <DateTimePicker
+          testID={testIdDateTimePicker}
+          value={value || new Date()}
+          mode="date"
+          is24Hour={is24Hour}
+          display="default"
+          onChange={(event, date) => {
+            setShowPicker(false);
+            handleDataTimeChange(event, date);
+          }}
+        />
+      )}
+
+      {showPicker && !isDatePicker && (
+        <DateTimePicker
+          testID={testIdDateTimePicker}
+          value={value || new Date()}
+          mode="time"
+          is24Hour={is24Hour}
+          display="default"
+          onChange={(event, date) => {
+            setShowPicker(false);
+            handleDataTimeChange(event, date);
+          }}
+        />
+      )}
     </View>
   );
 };

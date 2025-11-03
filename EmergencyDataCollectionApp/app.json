@@ -1,5 +1,6 @@
 {
   "expo": {
+    "_comment": "Note: iOS and Android use different bundle identifiers due to separate developer accounts",
     "name": "EmergencyDataCollectionApp",
     "slug": "EmergencyDataCollectionApp",
     "version": "1.0.2",
@@ -23,10 +24,10 @@
         "ITSAppUsesNonExemptEncryption": false
       },
       "bundleIdentifier": "com.shunt161.EmergencyDataCollectionApp",
-      "buildNumber": "6"
+      "buildNumber": "9"
     },
     "android": {
-      "versionCode": 5,
+      "versionCode": 7,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -78,10 +79,21 @@
         "expo-build-properties",
         {
           "ios": {
+            "useFrameworks": "static",
+            "deploymentTarget": "13.0",
             "otherCPlusPlusFlags": "-D_FMT_CHAR8_T=0",
             "buildSettings": {
-              "EXCLUDED_ARCHS[sdk=iphonesimulator*]": "arm64 x86_64"
+              "EXCLUDED_ARCHS[sdk=iphonesimulator*]": "arm64 x86_64",
+              "GCC_PREPROCESSOR_DEFINITIONS": "TARGET_OS_SIMULATOR=0"
             }
+          },
+          "android": {
+            "compileSdkVersion": 34,
+            "targetSdkVersion": 34,
+            "buildToolsVersion": "33.0.0",
+            "minSdkVersion": 21,
+            "enableProguardInReleaseBuilds": true,
+            "enableShrinkResourcesInReleaseBuilds": true
           }
         }
       ]      
@@ -90,6 +102,13 @@
       "eas": {
         "projectId": "1a9a31a9-45ad-44e7-987d-c853997aebc5"
       }
+    },
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "fix-simulator-issue.js"
+        }
+      ]
     }
   }
 }

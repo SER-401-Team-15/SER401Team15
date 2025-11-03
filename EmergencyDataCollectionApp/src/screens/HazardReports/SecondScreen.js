@@ -4,18 +4,18 @@ import { KeyboardAvoidingView } from "native-base";
 import React, { useState, useEffect } from "react";
 import { Platform, ScrollView } from "react-native";
 
-import { hazardReportAtom, hazardTabsStatusAtom, imagesAtom } from "./HazardPageAtoms";
+import { hazardReportAtom, hazardTabsStatusAtom } from "./HazardPageAtoms";
 import NavigationButtons from "./components/NavigationButtons";
 import CustomDateTimePickerComponent from "../../components/CustomForms/CustomDateTimePickerComponent/CustomDateTimePickerComponent";
 import CustomTextArea from "../../components/CustomForms/NativeBase/CustomTextArea/CustomTextArea";
 import EverythingCamera from "../../components/EverythingCamera/EverythingCamera";
+import { imagesAtom } from "../../components/EverythingCamera/ImagesAtom";
 import LineSeparator from "../../components/LineSeparator/LineSeparator";
 
 export default function SecondScreen() {
   const [hazardReport, setHazardReport] = useAtom(hazardReportAtom);
   const [hazardTabsStatus, setHazardTabsStatus] = useAtom(hazardTabsStatusAtom);
-  const images = useAtomValue(imagesAtom); // Move this to component level
-  const [inputText] = useState("");
+  const images = useAtomValue(imagesAtom);
   const [endTime, setEndTime] = useState(new Date());
 
   const handleEndTimeChange = (event, selectedDate) => {
@@ -42,7 +42,7 @@ export default function SecondScreen() {
       ...prev,
       info: {
         ...prev.info,
-        endTime: endTime,
+        endTime,
       },
     }));
 
@@ -59,8 +59,8 @@ export default function SecondScreen() {
     setHazardReport((prev) => ({
       ...prev,
       hazardPicture: {
-        number: images.length
-      }
+        number: images.length,
+      },
     }));
   }, [images, setHazardReport]);
 
@@ -80,10 +80,13 @@ export default function SecondScreen() {
             isRequired
           />
           <CustomTextArea
-            label="2. Additional Notes:"
+            label="2. Additional notes: 300 character maximum"
             placeholder="Any additional notes you would like to add?"
             value={hazardReport.note.NotesTextArea}
             onChangeText={handleNotesChange}
+            maxLength={300}
+            showCharacterCount={true}
+            showCompleteButton={true}
             testID="hazard-report-note-page-additional-notes-textarea"
             formControlProps={{
               marginTop: 2,

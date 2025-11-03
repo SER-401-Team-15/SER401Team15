@@ -50,7 +50,7 @@ function FirstScreen() {
     resetLatitude();
     resetLongitude();
     resetAccuracy();
-  }, [latitude, longitude, accuracy]);
+  }, [latitude, longitude, accuracy, hazardReport.location.accuracy, setHazardReport, resetLatitude, resetLongitude, resetAccuracy]);
 
   const handleDataTimeChange = (event, selectedDate) => {
     console.log("handleDataTimeChange called");
@@ -66,7 +66,7 @@ function FirstScreen() {
         hazardType: value,
       },
     }));
-    setIsHazardTypeValid(!value);
+    setIsHazardTypeValid(false); // Set to false when a value is selected
   };
 
   const validateData = () => {
@@ -110,10 +110,23 @@ function FirstScreen() {
       const min = 100000000;
       const max = 999999999;
       const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-      hazardReport.info.hash = randomNumber;
+      
+      setHazardReport((prev) => ({
+        ...prev,
+        info: {
+          ...prev.info,
+          hash: randomNumber,
+          reportID: prev.info.reportType + "_" + randomNumber,
+        },
+      }));
     } else {
-      hazardReport.info.reportID =
-        hazardReport.info.reportType + "_" + hazardReport.info.hash;
+      setHazardReport((prev) => ({
+        ...prev,
+        info: {
+          ...prev.info,
+          reportID: prev.info.reportType + "_" + prev.info.hash,
+        },
+      }));
     }
 
     const currentTabIndex = hazardTabsStatus.tabIndex;

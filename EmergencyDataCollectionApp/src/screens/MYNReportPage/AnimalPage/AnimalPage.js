@@ -171,13 +171,16 @@ const AnimalPage = () => {
           )}
           {showAnimalTextBox && (
             <CustomTextArea
-              label="3. Additional Information about Farm Animals"
+              label="3. Additional Information about Farm Animals: 300 character maximum"
               placeholder="Other farm animals, like cows or horses that require attention, please make detailed notes"
               value={mynReport.animal.animalNotes}
               isRequired
               onChangeText={handleAnimalNotesChange}
               isInvalid={isAnimalNotesInvalid}
               errorMessage="Please fill in the required field"
+              maxLength={300}
+              showCharacterCount={true}
+              showCompleteButton={true}
               testID="myn-report-animal-page-animal-notes-textarea"
               formControlProps={{
                 marginTop: 2,

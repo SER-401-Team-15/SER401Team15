@@ -112,11 +112,15 @@ const AppSettings = () => {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollViewContent}>
+    <ScrollView 
+      contentContainerStyle={styles.scrollViewContent}
+      showsVerticalScrollIndicator={false}
+      keyboardShouldPersistTaps="handled"
+    >
       <View style={styles.container}>
         <NativeBaseProvider>
           <Text style={styles.header}>User Preferences:</Text>
-          <View>
+          <View style={styles.formSection}>
             <Text>Ready Neighbor Group Name</Text>
             <CustomInput
               value={groupName}
@@ -125,7 +129,7 @@ const AppSettings = () => {
               style={styles.input}
             />
           </View>
-          <View>
+          <View style={styles.formSection}>
             <Text>Cert Group Number</Text>
             <CustomInput
               value={selectedCertGroupNumber}
@@ -141,7 +145,7 @@ const AppSettings = () => {
               style={styles.input}
             />
           </View>
-          <View>
+          <View style={styles.formSection}>
             <Text>City</Text>
             <CustomInput
               value={city}

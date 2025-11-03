@@ -52,7 +52,7 @@ class DrawerCustomItem extends React.Component {
             color={focused ? "white" : Theme.COLORS.TEXT_BLACK}
           />
         );
-      case "Neighbor Check Website":
+      case "NeighborCheck Website":
         return (
           <Icon
             as={ExternalLinkIcon}
@@ -105,7 +105,7 @@ class DrawerCustomItem extends React.Component {
             Linking.openURL("https://www.bellelealand.net/donations").catch(
               (err) => console.error("An error occurred", err),
             );
-          } else if (title === "Neighbor Check Website") {
+          } else if (title === "NeighborCheck Website") {
             Linking.openURL("https://neighborcheckapp.wixsite.com/home").catch(
               (err) => console.error("An error occured", err),
             );

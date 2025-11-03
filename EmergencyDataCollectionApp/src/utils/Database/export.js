@@ -5,7 +5,6 @@ import { Platform } from "react-native";
 import { queryReportsByMultipleIds } from "./OfflineSQLiteDB";
 
 async function writeFile(contents) {
-  console.log("We are writing to file: ", contents);
   const timestamp = new Date().toISOString().replace(/[:.-]/g, "_");
   const fileName = FileSystem.documentDirectory + `exported-reports-${timestamp}.csv`;
   
@@ -18,7 +17,6 @@ async function writeFile(contents) {
     if (Platform.OS === "ios") {
       const share = await Sharing.isAvailableAsync();
       if (!share) {
-        console.log("Sharing not available");
         return { success: false, message: "Sharing not available on this device" };
       }
       

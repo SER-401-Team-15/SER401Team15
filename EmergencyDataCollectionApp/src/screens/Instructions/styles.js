@@ -16,11 +16,12 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   placehodler: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: "bold",
   },
   text: {
-    fontSize: 12,
+    fontSize: 16,
+    fontWeight: "500",
   },
   accordion: {
     backgroundColor: Theme.COLORS.BACKGROUND_YELLOW,

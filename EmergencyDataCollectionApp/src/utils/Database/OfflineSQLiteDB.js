@@ -24,13 +24,9 @@ export function setupDatabase(callback) {
         [],
         (_, { rows: { _array } }) => {
           const columnExists = _array.some(column => column.name === "image_paths");
-          console.log("Existing Columns in `reports`:", _array.map(col => col.name));
       
           if (!columnExists) {
-            console.log("Adding `image_paths` column...");
             addImagePathsColumn();
-          } else {
-            console.log("`image_paths` column already exists.");
           }
         },
         (_, error) => console.error(" Error checking columns:", error)
@@ -40,7 +36,6 @@ export function setupDatabase(callback) {
         "create table if not exists reports (report_id integer primary key not null, report_type text, report_data text, image_paths TEXT);",
         [],
         (_, result) => {
-          console.log("Table created", result);
           callback?.(true, null);
         },
         (t, error) => {
@@ -55,7 +50,6 @@ export function setupDatabase(callback) {
       callback?.(false, error);
     },
     () => {
-      console.log("Transaction successful for creating table");
       callback?.(true, null);
     },
   );
@@ -73,11 +67,9 @@ function addImagePathsColumn() {
           tx.executeSql(
             "ALTER TABLE reports ADD COLUMN image_paths TEXT;",
             [],
-            () => console.log("`image_paths` column added successfully!"),
+            () => {},
             (_, error) => console.error("Error adding `image_paths` column:", error)
           );
-        } else {
-          console.log("`image_paths` column already exists.");
         }
       },
       (_, error) => console.error("Error checking columns:", error)
@@ -94,17 +86,14 @@ export function addReport(reportType, data, imageUris = [], callback) {
   
   const cleanedData = sanitizeReportData(reportType, data);
   
-  const imagePaths = imageUris ? JSON.stringify(imageUris.map(uri => uri.replace(/'/g, "''"))) : null; 
-  console.log("imagePaths", imagePaths);
+  const imagePaths = imageUris ? JSON.stringify(imageUris.map(uri => uri.replace(/'/g, "''"))) : null;
 
   db.transaction(
     (tx) => {
-      console.log("Adding report to database", reportType, cleanedData);
       tx.executeSql(
         "insert into reports (report_type, report_data, image_paths) values (?, ?, ?)",
         [reportType, JSON.stringify(cleanedData), imagePaths],
         () => {
-          console.log("Report added successfully");
           callback?.(true, null);
         },
         (t, error) => {
@@ -118,9 +107,6 @@ export function addReport(reportType, data, imageUris = [], callback) {
       console.error("Transaction error", error);
       callback?.(false, error);
     },
-    () => {
-      console.log("Transaction successful for adding report");
-    },
   );
 }
 
@@ -133,7 +119,6 @@ export function queryAllReports(setReports) {
         (_, { rows: { _array } }) => {
           const reports = _array.map((row) => {
             try {
-              console.log("row", row);
               return { ...row,
                 report_data: JSON.parse(row.report_data),
                 image_paths: row.image_paths ? row.image_paths : null 
@@ -149,10 +134,6 @@ export function queryAllReports(setReports) {
           console.error("Error querying reports", error);
         },
       );
-    },
-    null,
-    () => {
-      console.log("Transaction successful for querying all reports");
     },
   );
 }
@@ -176,7 +157,6 @@ export function queryReportById(reportId, setReport) {
               setReport(null);
             }
           } else {
-            console.log("No report found with ID", reportId);
             setReport(null);
           }
         },
@@ -184,10 +164,6 @@ export function queryReportById(reportId, setReport) {
           console.error("Error querying report by ID", error);
         },
       );
-    },
-    null,
-    () => {
-      console.log("Transaction successful for querying report by ID");
     },
   );
 }
@@ -219,7 +195,6 @@ export function queryReportsByMultipleIds(reportIds, setReports) {
               setReports(null);
             }
           } else {
-            console.log("No report found with IDs", reportIds);
             setReports(null);
           }
         },
@@ -227,10 +202,6 @@ export function queryReportsByMultipleIds(reportIds, setReports) {
           console.error("Error querying report by IDs", error);
         },
       );
-    },
-    null,
-    () => {
-      console.log("Transaction successful for querying report by IDs");
     },
   );
 }
@@ -244,7 +215,6 @@ export function queryReportsByType(reportType, setReports) {
         (_, { rows: { _array } }) => {
           const processedReports = _array.map((row) => {
             try {
-              console.log("row", row);
               const parsedData = JSON.parse(row.report_data);
               return { ...row,
                 report_data: parsedData,
@@ -265,9 +235,6 @@ export function queryReportsByType(reportType, setReports) {
     (error) => {
       console.error("Transaction error on querying reports by type", error);
     },
-    () => {
-      console.log("Transaction successful for querying reports by type");
-    },
   );
 }
 
@@ -284,7 +251,6 @@ export function updateReportById(reportId, newData, callback) {
         "UPDATE reports SET report_data = ? WHERE report_id = ?",
         [JSON.stringify(newData), reportId],
         () => {
-          console.log(`Report with ID ${reportId} updated successfully`);
           callback?.(true, null);
         },
         (t, error) => {
@@ -298,14 +264,11 @@ export function updateReportById(reportId, newData, callback) {
       console.error("Transaction error", error);
       callback?.(false, error);
     },
-    () => {
-      console.log("Transaction successful for updating report");
-    },
   );
 }
 
+// Debug functions - only used during development
 export function logAllReports() {
-  // console.log('fetc')
   db.transaction(
     (tx) => {
       tx.executeSql(
@@ -318,10 +281,6 @@ export function logAllReports() {
           console.error("Error querying reports", error);
         },
       );
-    },
-    null,
-    () => {
-      console.log("Transaction successful for logging all reports");
     },
   );
 }
@@ -343,10 +302,6 @@ export function logAllReportsByType(reportType) {
         },
       );
     },
-    null,
-    () => {
-      console.log("Transaction successful for logging reports by type");
-    },
   );
 }
 
@@ -356,9 +311,6 @@ export function dropTable() {
       tx.executeSql("drop table reports;", []);
     },
     (error) => console.error("Error dropping table", error),
-    () => {
-      console.log("Database reset successful");
-    },
   );
 }
 export function removeReportById(reportId, callback) {
@@ -368,7 +320,6 @@ export function removeReportById(reportId, callback) {
         "delete from reports where report_id = ?;",
         [reportId],
         () => {
-          console.log(`Report with ID ${reportId} removed successfully`);
           callback?.(true, null);
         },
         (t, error) => {
@@ -381,9 +332,6 @@ export function removeReportById(reportId, callback) {
       console.error("Transaction error", error);
       callback?.(false, error);
     },
-    () => {
-      console.log("Transaction successful for removing report by ID");
-    },
   );
 }
 
@@ -391,16 +339,12 @@ export function truncateTable(callback) {
   db.transaction(
     (tx) => {
       tx.executeSql("delete from reports;", [], () => {
-        console.log("Table truncated successfully");
         callback?.(true, null);
       });
     },
     (error) => {
       console.error("Transaction error", error);
       callback?.(false, error);
-    },
-    () => {
-      console.log("Transaction successful for truncating table");
     },
   );
 }
@@ -413,7 +357,6 @@ export const fetchHazardReports = (callback) => {
       "SELECT * FROM HazardReport;",
       [],
       (_, { rows: { _array } }) => {
-        console.log("Hazard Reports fetched: ", _array);
         const mappedReports = _array.map((report) => ({
           ...report,
           report_id: report.id,

@@ -30,11 +30,7 @@ const LocationManager_v2 = () => {
       location.coords.accuracy <= LOCATION_ACCURACY_THRESHOLD
     ) {
       setLocationData((prevData) => [...prevData, location]);
-    } else if (location?.coords) {
-      console.log(
-        `Ignored location with accuracy: ${location.coords.accuracy}`,
-      );
-    } else {
+    } else if (!location?.coords) {
       Alert.alert(
         "Location Error: ",
         location?.error || "Failed to fetch location",
@@ -62,21 +58,8 @@ const LocationManager_v2 = () => {
 
   useEffect(() => {
     if (isLoggingLocationData) {
-      console.log("Location Data:");
       const filteredData = filterOutliers(locationData);
-      console.log(
-        "Filtered out",
-        locationData.length - filteredData.length,
-        "locations",
-      );
-      console.log("Number of valid locations:", filteredData.length);
       const averageData = calculateAverageLocationAndAccuracy(filteredData);
-      console.log(
-        "Average Location:",
-        averageData.latitude,
-        averageData.longitude,
-      );
-      console.log("Average Accuracy:", averageData.accuracy.toFixed(1));
 
       if (filteredData.length === 0) {
         Alert.alert(

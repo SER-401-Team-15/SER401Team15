@@ -62,7 +62,7 @@ function CustomDrawerContent({
             </Text>
           </Block>
           <DrawerCustomItem
-            title="Neighbor Check Website"
+            title="NeighborCheck Website"
             navigation={navigation}
           />
           <DrawerCustomItem title="Donation" navigation={navigation} />

@@ -14,26 +14,23 @@ const Welcome = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.imageContainer}>
         <Image
-          source={Images.Welcome}
-          style={styles.image}
-          testID="welcomeImage"
+          source={Images.certLogo}
+          style={styles.mainLogo}
+          testID="certLogoImage"
         />
       </View>
       <View style={styles.imageContainer}>
-      <Image
-        source={Images.cleanLogo}
-        style={styles.image2}
-        testID="cleanLogoImage"
-      />
-    </View>
-      {/* <View style={styles.textContainer}>
-        <Text style={styles.title}>Neighbor Check</Text>
-      </View> */}
+        <Image
+          source={Images.cleanLogo}
+          style={styles.cleanLogo}
+          testID="cleanLogoImage"
+        />
+      </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity
-          style={styles.button}
-          testID="getStartedButton"
+          style={styles.getStartedButton}
           onPress={() => navigation.navigate("App")}
+          testID="getStartedButton"
         >
           <Text style={styles.buttonText}>Get Started</Text>
         </TouchableOpacity>

@@ -8,54 +8,46 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
+    backgroundColor: "#ffffff",
+    justifyContent: "space-evenly", // Distribute content evenly
   },
   imageContainer: {
-    flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    paddingTop: height * 0.15,
+    paddingHorizontal: 20,
   },
-  textContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    paddingTop: height * 0.1,
+  mainLogo: {
+    width: width * 0.85, // Make CERT logo prominent
+    height: height * 0.25, // Larger size for main logo
+    resizeMode: "contain",
+  },
+  cleanLogo: {
+    width: width * 0.8, // Bigger size as requested
+    height: height * 0.25,
+    resizeMode: "contain",
   },
   buttonContainer: {
-    flex: 1,
-    justifyContent: "flex-end",
-    alignItems: "stretch",
-    marginBottom: height * 0.06,
+    paddingHorizontal: 40,
+    width: "100%",
+    paddingBottom: height * 0.05,
   },
-  image: {
-    width: width * 0.7,
-    height: (width * 0.7) / 1.3,
-    borderRadius: Theme.RADIUS.IMAGE,
-  },
-  image2: {
-    width: width * 0.5,
-    height: (width * 0.5) / 1.0,
-    marginTop: height * 0.09,
-    borderRadius: Theme.RADIUS.IMAGE,
-  },
-  title: {
-    fontSize: Theme.TYPOGRAPHY.FONT_SIZE.XLARGE,
-    fontWeight: Theme.TYPOGRAPHY.FONT_WEIGHT.BOLD,
-    marginBottom: 15,
-  },
-  subtitle: {
-    fontSize: Theme.TYPOGRAPHY.FONT_SIZE.MED_LARGE,
-  },
-  button: {
+  getStartedButton: {
     backgroundColor: Theme.COLORS.BACKGROUND_YELLOW,
     paddingVertical: Theme.BUTTON_PADDING.VERTICAL,
-    width: width * 0.8,
     borderRadius: Theme.RADIUS.BUTTON,
+    alignItems: "center",
+    elevation: 2,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
   },
   buttonText: {
+    fontSize: 18,
+    fontWeight: "bold",
     color: Theme.COLORS.TEXT_BLACK,
-    fontSize: Theme.TYPOGRAPHY.FONT_SIZE.MED_LARGE,
-    fontWeight: Theme.TYPOGRAPHY.FONT_WEIGHT.REGULAR,
-    textAlign: "center",
   },
 });
